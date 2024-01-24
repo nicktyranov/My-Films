@@ -1,8 +1,10 @@
 
 import './App.css';
 import Heading from './Components/Heading/Heading';
+import InputSearch from './Components/InputSearch/InputSearch';
+import Menu from './Components/Menu/Menu';
 import Paragraf from './Components/Paragraf/Paragraf';
-import Button from './components/Button/Button';
+
 
 
 function App() {
@@ -10,10 +12,14 @@ function App() {
 
 	return (
 		<>
+			<Menu/>
 			<div>
-				<Heading></Heading>
+				<Heading />
 				<Paragraf />
-				<Button />
+				<div>
+					<InputSearch />
+					
+				</div>
 				
 
 			</div>

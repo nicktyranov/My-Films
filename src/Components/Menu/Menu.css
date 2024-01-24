@@ -1,0 +1,35 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0 100px;
+}
+
+.menu-list {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  color: #a8aebf;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.32px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  color: white;
+}
+
+.menu-item-active {
+  color: #fff;
+}

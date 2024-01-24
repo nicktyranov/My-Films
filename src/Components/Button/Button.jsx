@@ -1,10 +1,13 @@
 import './Button.css';
 
-function Button() {
+function Button({textButton = 'Search'}) {
 
+	const onClick = () => {
+
+	};
 
 	return (
-		<button className='button'>Search</button>
+		<button className='button' onClick={onClick}>{ textButton}</button>
 	);
 }
 
