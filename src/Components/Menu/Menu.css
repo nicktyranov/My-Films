@@ -7,7 +7,7 @@
 
 .menu-list {
   display: flex;
-  gap: 16px;
+  gap: 48px;
   align-items: center;
   justify-content: center;
 }
@@ -32,4 +32,19 @@
 
 .menu-item-active {
   color: #fff;
+}
+
+.filmNum {
+  color: #fff;
+  font-family: Poppins;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 0.28px;
+  background-color: #7b6ef6;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
 }
