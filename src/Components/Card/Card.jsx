@@ -1,29 +1,36 @@
-import './Card.css';
+import { useState } from 'react';
+
+import cl from 'classnames';
+import styles from './Card.module.css';
+
+import bookmarkIcon from '../../assets/Bookmark.svg';
+import likeIcon from '../../assets/like.svg';
+import starIcon from '../../assets/star.svg';
+
 
 function Card({ inFavorites, img, rating, heading }) {
-	let classNameFavorites;
-	let iconFavorite;
-	let textFavorite;
-	if (inFavorites) {
-		classNameFavorites = 'favorites inFavorites';
-		iconFavorite = '../../public/Bookmark.svg';
-		textFavorite = 'В избранном';
-	} else {
-		classNameFavorites = 'favorites';
-		iconFavorite = '../../public/like.svg';
-		textFavorite = 'В избранное';
-	}
+	const [isInFavorites, setIsInFavorites] = useState(inFavorites);
+
+	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
+	const textFavorite = isInFavorites ? 'В избранном' : 'В избранное';
+
+	const classNameFavorites = cl({
+		[styles.favorites]: true,
+		[styles.inFavorites]: isInFavorites
+	});
+
 
 	return (
 		<>
-			<div className='card'>
-				<img className='card-poster' src={img} alt={heading} />
-				<div className='rating'>
-					<img src="../../public/star.svg" alt="rating icon" /> 
-					<span className='ratingNum'>{rating}</span>
+			<div className={styles.card}>
+				<img className={styles['card-poster']} src={img} alt={heading} />
+				<div className={styles.rating}>
+				
+					<img src={starIcon} alt="rating icon" />
+					<span className={styles.ratingNum}>{rating}</span>
 				</div>
-				<div className='card-text'>
-					<h2 className='heading-film'>{heading}</h2>
+				<div className={styles['card-text']}>
+					<h2 className={styles['heading-film']}>{heading}</h2>
 					<div className={classNameFavorites}>
 						<img src={iconFavorite} alt="like/dislike icon" />
 						{textFavorite}
@@ -35,20 +42,3 @@ function Card({ inFavorites, img, rating, heading }) {
 }
 
 export default Card;
-
-// (
-//         <>
-// <div className='card'>
-//     <img className='card-poster' src={img} alt={heading} />
-//     <div className='rating'>
-//         <img src="../../public/star.svg" alt="rating icon" /> 
-//         <span className='ratingNum'>{rating}</span>
-//     </div>
-//     <div className='card-text'>
-//         <h2>{heading}</h2>
-//                     {/* ... остальная часть вашей логики ... */}
-//                 </div>
-//             </div>
-//         </>
-//     );
-// }

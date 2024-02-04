@@ -1,15 +1,18 @@
 import Button from '../Button/Button';
-import './InputSearch.css';
 
+import cl from 'classnames';
+import styles from './InputSearch.module.css';
+
+import searchIcon from '../../assets/images/search.svg';
 
 function InputSearch() {
 
 
 	return (
-		<div className='search-wrapper'>
-			<div className='input-wrapper'>
-				<input className='input-search' type="text" placeholder='Enter the name'/> 
-				<img src="../../public/search.svg" alt="search-icon"  />
+		<div className={styles['search-wrapper']}>
+			<div className={styles['input-wrapper']}>
+				<input className={styles['input-search']} type="text" placeholder='Enter the name of the film'/> 
+				<img src={searchIcon} alt="search-icon"  />
 			</div>
 			<Button/>
 		

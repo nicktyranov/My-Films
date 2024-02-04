@@ -1,4 +1,5 @@
-import './Paragraf.css';
+import styles from './Paragraf.module.css';
+import cl from 'classnames';
 
 function Paragraf() {
 
