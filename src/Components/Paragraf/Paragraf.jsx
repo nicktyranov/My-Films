@@ -1,11 +1,11 @@
 import styles from './Paragraf.module.css';
-import cl from 'classnames';
+// import cl from 'classnames';
 
-function Paragraf() {
-
+function Paragraf({text}) {
+	
 
 	return (
-		<p>Введите название фильма, сериала или мультфильма для поиска <br /> и добавления в избранное.</p>
+		<p className={styles.text}>{text }</p>
 	);
 }
 
