@@ -1,38 +1,42 @@
 
-import  { useState, useRef } from 'react'; 
+import  { useState, useRef, useContext } from 'react'; 
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
 import Paragraf from '../Paragraf/Paragraf';
+import { CurrentUserContext } from '../../context/user.context';
 
-function Login({isLogined, setIsLogined }) {
+function Login() {
 	const headingText = 'Login';
 	const placeholder = 'Enter your name';
 	const textButton = 'Login';
 	const buttonLoginRef = useRef(null);
 
-	const [userName, setUserName] = useState(''); 
+	const [InputUserName, setInputUserName] = useState(''); 
+	const {isLogined, setIsLogined, setUserName } = useContext(CurrentUserContext);
 
 	function onClick() {
-		console.log(userName);
-		const userDataStr = localStorage.getItem(userName);
+		console.log(InputUserName);
+		const userDataStr = localStorage.getItem(InputUserName);
 
 		if (!userDataStr) {
 			console.log('пусто');
 			console.log('создаю новый профиль');
 			// Сохраняем данные пользователя как объект
 			const userData = {
-				name: userName,
+				name: InputUserName,
 				isLogined: true, 
 				userFavorites: []
 			};
-			localStorage.setItem(userName, JSON.stringify(userData));
+			localStorage.setItem(InputUserName, JSON.stringify(userData));
 			console.log('новый профиль создан');
 		} else {
 			console.log('профиль найден');
 		}
-		localStorage.setItem('lastLoggedInUser', userName);
+		localStorage.setItem('lastLoggedInUser', InputUserName);
 		setIsLogined(true);
+		//чтобы обновить глобальный UserName
+		setUserName(InputUserName);
 	}
 
 	const loginMessage = isLogined ? (
@@ -41,7 +45,7 @@ function Login({isLogined, setIsLogined }) {
 
 
 	function handleChange(event) {
-		setUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
+		setInputUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
 	}
 
 	return (
@@ -51,7 +55,7 @@ function Login({isLogined, setIsLogined }) {
 				type="text" 
 				placeholder={placeholder} 
 				className={styles['input_login']}
-				value={userName} 
+				value={InputUserName} 
 				onChange={handleChange}
 				id='loginName'
 			/>
