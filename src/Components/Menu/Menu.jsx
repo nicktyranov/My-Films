@@ -1,14 +1,13 @@
 
 import cl from 'classnames';
 import styles from './Menu.module.css';
-
 import loginIcon from '../../assets/images/login.svg';
 import userIcon from '../../assets/images/user.svg';
-import { useContext } from 'react';
-import { CurrentUserContext } from '../../context/user.context';
+import { useUserContext } from '../../context/user.context';
+
 
 function Menu() {
-	const { userName, isLogined, setIsLogined } = useContext(CurrentUserContext);
+	const { userName, isLogined, setIsLogined } = useUserContext();
 	console.log(userName);
 	const filmNum = 2;
 
@@ -18,20 +17,6 @@ function Menu() {
 	});
     
 	const handleLoginClick = () => {
-		// if (isLogined) {
-		// 	const lastLoggedInUser = localStorage.getItem('lastLoggedInUser');
-			
-		// 	if (lastLoggedInUser) {
-		// 		const userDataStr = localStorage.getItem(lastLoggedInUser);
-				
-		// 		if (userDataStr) {
-		// 			const userData = JSON.parse(userDataStr);
-		// 			userData.isLogined = false;
-		// 			localStorage.setItem(lastLoggedInUser, JSON.stringify(userData));
-		// 		}
-		// 		localStorage.removeItem('lastLoggedInUser');
-		// 	}
-		// 	setIsLogined(false);
 		let userDataStr;
 		if (isLogined && userName) {
 			userDataStr = localStorage.getItem(userName);
@@ -55,8 +40,6 @@ function Menu() {
 		</div>
 	);
     
-	// const userName = isLogined ? localStorage.getItem('lastLoggedInUser') : null;
-
 	const userNameMenu = isLogined ? (
 		<div className={styles['menu-item']}>
 			{userName} 

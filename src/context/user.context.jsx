@@ -1,5 +1,5 @@
 
-import { createContext, useState } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 export const CurrentUserContext = createContext({
 	isLogined: false,
@@ -8,10 +8,12 @@ export const CurrentUserContext = createContext({
 	setUserName: () => {}
 });
 
+export const useUserContext = () => useContext(CurrentUserContext);
+
 export const CurrentUserProvider = ({ children }) => {
 	const [isLogined, setIsLogined] = useState(false);
 	const [userName, setUserName] = useState('');
-
+	
 	return (
 		<CurrentUserContext.Provider value={{ isLogined, setIsLogined, userName, setUserName }}>
 			{children}
@@ -19,15 +21,3 @@ export const CurrentUserProvider = ({ children }) => {
 	);
 };
 
-
-// export const UserContext = createContext({
-// 	userId: 1
-// });
-
-// export const UserContextProvidev = ({ children }) => {
-// 	const [userId, setUserId] = useState(1);
-
-// 	return <UserContext.Provider value={{ userId, setUserId }}>
-// 		{children}
-// 	</UserContext.Provider>;
-// };

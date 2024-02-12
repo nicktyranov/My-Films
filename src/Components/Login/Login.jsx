@@ -1,21 +1,25 @@
 
-import  { useState, useRef, useContext } from 'react'; 
+import  { useState, useRef } from 'react'; 
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
-import Paragraf from '../Paragraf/Paragraf';
-import { CurrentUserContext } from '../../context/user.context';
+import Paragrah from '../Paragrah/Paragrah';
+import { useUserContext } from '../../context/user.context';
+
+const headingText = 'Login';
+const placeholder = 'Enter your name';
+const textButton = 'Login';
 
 function Login() {
-	const headingText = 'Login';
-	const placeholder = 'Enter your name';
-	const textButton = 'Login';
 	const buttonLoginRef = useRef(null);
-
 	const [InputUserName, setInputUserName] = useState(''); 
-	const {isLogined, setIsLogined, setUserName } = useContext(CurrentUserContext);
+	const {isLogined, setIsLogined, setUserName } = useUserContext();
 
 	function onClick() {
+		if (!InputUserName.trim()) {
+			return;
+		}
+
 		console.log(InputUserName);
 		const userDataStr = localStorage.getItem(InputUserName);
 
@@ -32,6 +36,9 @@ function Login() {
 			console.log('новый профиль создан');
 		} else {
 			console.log('профиль найден');
+			const userData = JSON.parse(userDataStr);
+			userData.isLogined = true; 
+			localStorage.setItem(InputUserName, JSON.stringify(userData));
 		}
 		localStorage.setItem('lastLoggedInUser', InputUserName);
 		setIsLogined(true);
@@ -40,7 +47,7 @@ function Login() {
 	}
 
 	const loginMessage = isLogined ? (
-		<Paragraf text={'Success'} />
+		<Paragrah text={'Success'} />
 	) : null;
 
 
