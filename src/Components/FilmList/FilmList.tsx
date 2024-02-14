@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Card from '../Card/Card';
-import filmData from '../../mock/filmData.js';
+import filmData from '../../mock/filmData';
 // import cl from 'classnames';
 import styles from './FilmList.module.css';
 

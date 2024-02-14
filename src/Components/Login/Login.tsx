@@ -1,5 +1,5 @@
 
-import  { useState, useRef } from 'react'; 
+import  { useState, useRef, ChangeEvent } from 'react'; 
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
@@ -51,13 +51,13 @@ function Login() {
 	) : null;
 
 
-	function handleChange(event) {
+	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		setInputUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
 	}
 
 	return (
 		<div className={styles['login_wrapper']}>
-			<Heading headingText={headingText} />
+			<Heading headingText={headingText} level={1}/>
 			<input 
 				type="text" 
 				placeholder={placeholder} 
