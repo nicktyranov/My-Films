@@ -6,9 +6,10 @@ import styles from './Card.module.css';
 import bookmarkIcon from '../../assets/Bookmark.svg';
 import likeIcon from '../../assets/like.svg';
 import starIcon from '../../assets/star.svg';
+import { CardProps } from './Card.props';
 
 
-function Card({ inFavorites, img, rating, heading }) {
+function Card({ inFavorites, img, rating, heading }:CardProps) {
 	const [isInFavorites, setIsInFavorites] = useState(inFavorites);
 
 	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
