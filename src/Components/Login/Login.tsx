@@ -57,7 +57,7 @@ function Login() {
 
 	return (
 		<div className={styles['login_wrapper']}>
-			<Heading headingText={headingText} level={1}/>
+			<Heading headingText={headingText} level={1} appearance='big'/>
 			<input 
 				type="text" 
 				placeholder={placeholder} 

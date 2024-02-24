@@ -1,21 +1,25 @@
-
 import React from 'react';
 import styles from './Heading.module.css';
+import cl from 'classnames';
 import { HeadingProps } from './Heading.props';
 
-function Heading({ headingText = 'Search', level = 1 }: HeadingProps) {
-// 	let Tag = `h${level}`; 
+function Heading({ headingText = 'Search', level = 1, appearance, ...props }: HeadingProps) {
 
-// 	return (
-// 		<Tag className={styles.heading}>{headingText}</Tag>
-// 	);
-	// }
-	
-	const Tag = `h${level}` as keyof JSX.IntrinsicElements; // Приведение типа к ключу JSX.IntrinsicElements
+  const className = cl({
+    [styles['heading-big']]: appearance === 'big',
+    [styles['heading-small']]: appearance === 'small',
+  });
 
-  return React.createElement(Tag, { className: styles.heading }, headingText);
+
+  const Tag = `h${level}`;
+
+  // Объединяем класс с другими пропсами
+  const elementProps = {
+    ...props,
+    className: className,
+  };
+
+  return React.createElement(Tag, elementProps, headingText);
 }
-
-
 
 export default Heading;
