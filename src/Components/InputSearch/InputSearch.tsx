@@ -1,8 +1,6 @@
 import Button from '../Button/Button';
-// import cl from 'classnames';
 import styles from './InputSearch.module.css';
 import { useRef } from 'react';
-
 import searchIcon from '../../assets/images/search.svg';
 
 function InputSearch() {

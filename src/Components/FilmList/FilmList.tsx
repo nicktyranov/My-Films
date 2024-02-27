@@ -5,6 +5,7 @@ import filmData from '../../mock/filmData';
 import styles from './FilmList.module.css';
 
 function FilmList() {
+	//еще может пригодится этот код
 	// const INITIAL_DATA = [
 	// 	{
 	// 		id: 1,
@@ -71,7 +72,7 @@ function FilmList() {
 
 	const [films, setFilms] = useState(filmData);
 
-	let list = films.map((film) => (
+	const list = films.map((film) => (
 		console.log([film.id, film.img]),
 
 		<Card

@@ -5,21 +5,20 @@ import { HeadingProps } from './Heading.props';
 
 function Heading({ headingText = 'Search', level = 1, appearance, ...props }: HeadingProps) {
 
-  const className = cl({
-    [styles['heading-big']]: appearance === 'big',
-    [styles['heading-small']]: appearance === 'small',
-  });
+	const className = cl({
+		[styles['heading-big']]: appearance === 'big',
+		[styles['heading-small']]: appearance === 'small'
+	});
 
+	const Tag = `h${level}`;
 
-  const Tag = `h${level}`;
+	// Объединяем класс с другими пропсами
+	const elementProps = {
+		...props,
+		className: className
+	};
 
-  // Объединяем класс с другими пропсами
-  const elementProps = {
-    ...props,
-    className: className,
-  };
-
-  return React.createElement(Tag, elementProps, headingText);
+	return React.createElement(Tag, elementProps, headingText);
 }
 
 export default Heading;

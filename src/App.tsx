@@ -19,7 +19,7 @@ function App() {
 			<CurrentUserProvider>
 				<Menu/>
 				<div>
-					<Heading headingText='Search' level={1}/>
+					<Heading headingText='Search' level={1} appearance='big'/>
 					<Paragrah text = {text} />
 					<div>
 						<InputSearch />

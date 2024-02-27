@@ -20,27 +20,28 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <HomePage/>,
+				element: <HomePage/>
 			},
 			{
 				path: '/login',
-				element: <LoginPage/>,
+				element: <LoginPage/>
 			},
 			{
 				path: '/favotites',
-				element: <Favotites/>,
+				element: <Favotites/>
 			},
 			{
 				path: '/movie/:id',
-				element: <Movie/>,
+				element: <Movie/>
 			},
 			{
 				path: '*',
 				element: <Error />
 			}
 		]
-	},
-])
+	}
+]);
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
@@ -50,10 +51,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 	</React.StrictMode>
 );
 
-// ReactDOM.createRoot(document.getElementById('root')!).render(
-// 	<React.StrictMode>
-// 		<App />
-// 	</React.StrictMode>
-// );
+
 
 

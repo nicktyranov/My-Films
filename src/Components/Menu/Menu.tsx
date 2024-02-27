@@ -5,7 +5,6 @@ import loginIcon from '../../assets/images/login.svg';
 import userIcon from '../../assets/images/user.svg';
 import { useUserContext } from '../../context/user.context';
 
-
 function Menu() {
 	const { userName, isLogined, setIsLogined } = useUserContext();
 	console.log(userName);

@@ -17,7 +17,7 @@
   gap: 8px;
   align-items: center;
   justify-content: center;
-  color: #a8aebf;
+  color: var(--color-menu-item);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -43,7 +43,7 @@
   font-weight: 600;
   line-height: 24px; /* 171.429% */
   letter-spacing: 0.28px;
-  background-color: #7b6ef6;
+  background-color: var(--color-bg-filmNum);
   width: 24px;
   height: 24px;
   border-radius: 50%;

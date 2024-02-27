@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import cl from 'classnames';
 import styles from './Card.module.css';
-
 import bookmarkIcon from '../../assets/Bookmark.svg';
 import likeIcon from '../../assets/like.svg';
 import starIcon from '../../assets/star.svg';
@@ -19,7 +18,7 @@ function Card({ inFavorites, img, rating, heading }:CardProps) {
 		[styles.favorites]: true,
 		[styles.inFavorites]: isInFavorites
 	});
-
+	
 
 	return (
 		<>

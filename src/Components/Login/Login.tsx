@@ -50,7 +50,6 @@ function Login() {
 		<Paragrah text={'Success'} />
 	) : null;
 
-
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		setInputUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
 	}

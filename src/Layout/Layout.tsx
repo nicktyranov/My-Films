@@ -3,11 +3,11 @@ import { NavLink, Outlet } from 'react-router-dom';
 import cl from 'classnames';
 import loginIcon from '../assets/images/login.svg';
 import userIcon from '../assets/images/user.svg';
-import { useUserContext, CurrentUserProvider } from '../context/user.context';
+import { useUserContext } from '../context/user.context';
 
 
 export function Layout() {
-const { userName, isLogined, setIsLogined } = useUserContext();
+	const { userName, isLogined, setIsLogined } = useUserContext();
 	console.log(userName);
 	const filmNum = 2;
     
@@ -29,19 +29,20 @@ const { userName, isLogined, setIsLogined } = useUserContext();
 		<NavLink
 			to={'/'}
 			className={({ isActive }) => cl(styles['menu-item'], {
-			[styles['menu-item-active']] : isActive
+				[styles['menu-item-active']] : isActive
 			})}
 			onClick={handleLoginClick}>
             Выйти
 		</NavLink>
 	) : (
 		<NavLink
-				to={'/login'}
-				className={({ isActive }) => cl(styles['menu-item'], {
+			to={'/login'}
+			className={({ isActive }) => cl(styles['menu-item'], {
 				[styles['menu-item-active']] : isActive
-				})}
-				onClick={handleLoginClick}>
-            	Войти <img src={loginIcon} alt="login-icon" />
+			})}
+			onClick={handleLoginClick}>
+				Войти
+			<img src={loginIcon} alt="login-icon" />
 		</NavLink>
 	);
     
@@ -54,31 +55,31 @@ const { userName, isLogined, setIsLogined } = useUserContext();
 
 	return (
 		<div className={styles['layout']}>
-		<div className={styles.menu}>
-			<img src="/logo.svg" alt="Logo" />
-			<nav className={styles['menu-list']}>
-				<NavLink
+			<div className={styles.menu}>
+				<img src="/logo.svg" alt="Logo" />
+				<nav className={styles['menu-list']}>
+					<NavLink
 						to={'/'}
 						className={({ isActive }) => cl(styles['menu-item'], {
-						[styles['menu-item-active']] : isActive
+							[styles['menu-item-active']] : isActive
 						})}>
 						Поиск фильмов
-				</NavLink>
-				<NavLink
+					</NavLink>
+					<NavLink
 						to={'/favotites'}
 						className={({ isActive }) => cl(styles['menu-item'], {
-						[styles['menu-item-active']] : isActive
+							[styles['menu-item-active']] : isActive
 						})}>
 						Мои фильмы
 						<span className={styles['filmNum']}>{filmNum}</span>
-				</NavLink>
-				{userNameMenu}
-				{menuLoginContent}
-			</nav>
-		</div>
-		<div className={styles['content']}>
-			<Outlet />
-		</div>
+					</NavLink>
+					{userNameMenu}
+					{menuLoginContent}
+				</nav>
+			</div>
+			<div className={styles['content']}>
+				<Outlet />
+			</div>
 		</div>
 		
 	);
