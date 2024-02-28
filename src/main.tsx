@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
@@ -10,7 +9,9 @@ import { LoginPage } from './Pages/LoginPage/LoginPage';
 import { Movie } from './Pages/Movie/Movie';
 import { HomePage } from './Pages/HomePage/HomePage';
 import { CurrentUserProvider } from './context/user.context';
-import { Error } from './Pages/Error/Error';
+// import { Error } from './Pages/Error/Error';
+import axios from 'axios';
+import { PREFIX } from './helpers/API';
 
 
 const router = createBrowserRouter([
@@ -32,11 +33,22 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/movie/:id',
-				element: <Movie/>
+				element: <Movie />,
+				errorElement: <HomePage isError={true} />,
+				loader: async ({ params }) => {
+					try {
+						const response = await axios.get(`${PREFIX}?tt=${params.id}`);
+						console.log(response);
+						return response.data;
+					} catch (e) {
+						console.error(e);
+					}
+				}
 			},
 			{
 				path: '*',
-				element: <Error />
+				// element: <Error /> спросить 
+				element: <HomePage isError={true}/>
 			}
 		]
 	}
