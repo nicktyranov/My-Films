@@ -5,6 +5,7 @@ import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
 import Paragrah from '../Paragrah/Paragrah';
 import { useUserContext } from '../../context/user.context';
+import { Navigate } from 'react-router-dom';
 
 const headingText = 'Login';
 const placeholder = 'Enter your name';
@@ -14,6 +15,14 @@ function Login() {
 	const buttonLoginRef = useRef(null);
 	const [InputUserName, setInputUserName] = useState(''); 
 	const {isLogined, setIsLogined, setUserName } = useUserContext();
+
+	function jwt() {
+		const expiresIn = 24 * 60 * 60 * 1000; // Срок действия 1 день в миллисекундах
+		const expirationTime = new Date().getTime() + expiresIn;
+		localStorage.setItem('jwt', JSON.stringify({
+			'jwt_expiration': expirationTime
+		}));
+	}
 
 	function onClick() {
 		if (!InputUserName.trim()) {
@@ -33,12 +42,14 @@ function Login() {
 				userFavorites: []
 			};
 			localStorage.setItem(InputUserName, JSON.stringify(userData));
+			jwt();
 			console.log('новый профиль создан');
 		} else {
 			console.log('профиль найден');
 			const userData = JSON.parse(userDataStr);
 			userData.isLogined = true; 
 			localStorage.setItem(InputUserName, JSON.stringify(userData));
+			jwt();
 		}
 		localStorage.setItem('lastLoggedInUser', InputUserName);
 		setIsLogined(true);
@@ -52,6 +63,10 @@ function Login() {
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		setInputUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
+	}
+
+	if (isLogined) {
+		return <Navigate to='/'/>;
 	}
 
 	return (

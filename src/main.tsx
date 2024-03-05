@@ -12,6 +12,7 @@ import { CurrentUserProvider } from './context/user.context';
 // import { Error } from './Pages/Error/Error';
 import axios from 'axios';
 import { PREFIX } from './helpers/API';
+import { RequireAuth } from './Components/RequireAuth/RequireAuth';
 
 
 const router = createBrowserRouter([
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <HomePage/>
+				element: <RequireAuth><HomePage/></RequireAuth>
 			},
 			{
 				path: '/login',
@@ -29,11 +30,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/favotites',
-				element: <Favotites/>
+				element: <RequireAuth><Favotites/></RequireAuth>
 			},
 			{
 				path: '/movie/:id',
-				element: <Movie />,
+				element: <RequireAuth><Movie /></RequireAuth>,
 				errorElement: <HomePage isError={true} />,
 				loader: async ({ params }) => {
 					try {
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
 			{
 				path: '*',
 				// element: <Error /> спросить 
-				element: <HomePage isError={true}/>
+				element: <RequireAuth><HomePage isError={true}/></RequireAuth>
 			}
 		]
 	}
