@@ -1,3 +1,7 @@
+.link {
+  text-decoration: none;
+}
+
 .card {
   max-width: 282px;
   max-height: 520px;
@@ -14,7 +18,8 @@
 .card-poster {
   position: relative;
   border-radius: 8px;
-  max-height: 400px;
+  height: 100%;
+  min-height: 400px;
 }
 
 .rating {
@@ -50,6 +55,11 @@
 }
 
 .heading-film {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Ограничение текста двумя строками */
+  overflow: hidden;
+  min-height: 48px;
   margin: 0;
   color: #ebeef5;
   font-size: 16px;

@@ -50,14 +50,13 @@ function Login() {
 		<Paragrah text={'Success'} />
 	) : null;
 
-
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		setInputUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
 	}
 
 	return (
 		<div className={styles['login_wrapper']}>
-			<Heading headingText={headingText} level={1}/>
+			<Heading headingText={headingText} level={1} appearance='big'/>
 			<input 
 				type="text" 
 				placeholder={placeholder} 

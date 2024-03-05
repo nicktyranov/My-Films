@@ -1,8 +1,9 @@
 import { HtmlHTMLAttributes } from 'react';
 
 export interface CardProps extends HtmlHTMLAttributes<HTMLElement> {
-	inFavorites: boolean,
+	id: string,
+	inFavorites?: boolean,
 	img: string,
 	rating: string | number,
-	heading: string
+	title: string
 }

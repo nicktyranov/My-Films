@@ -1,8 +1,10 @@
 :root {
   font-family: "Poppins", sans-serif;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  --color-heading: #ebeef5;
+  --color-menu-item: #a8aebf;
+  --color-bg-filmNum: #7b6ef6;
+
   background-color: #492c66;
 
   font-synthesis: none;
