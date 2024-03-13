@@ -1,11 +1,13 @@
 
-import  { useState, useRef, ChangeEvent } from 'react'; 
+import  { useState, useRef, ChangeEvent, useEffect } from 'react'; 
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
 import Paragrah from '../Paragrah/Paragrah';
 import { useUserContext } from '../../context/user.context';
 import { Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { favoritesSlice, loadFavorites } from '../../store/favoritesSlice';
 
 const headingText = 'Login';
 const placeholder = 'Enter your name';
@@ -14,7 +16,8 @@ const textButton = 'Login';
 function Login() {
 	const buttonLoginRef = useRef(null);
 	const [InputUserName, setInputUserName] = useState(''); 
-	const {isLogined, setIsLogined, setUserName } = useUserContext();
+	const { isLogined, setIsLogined, setUserName } = useUserContext();
+	const dispatch = useDispatch();
 
 	function jwt() {
 		const expiresIn = 24 * 60 * 60 * 1000; // Срок действия 1 день в миллисекундах
@@ -32,30 +35,42 @@ function Login() {
 		console.log(InputUserName);
 		const userDataStr = localStorage.getItem(InputUserName);
 
+		const userData = {
+			name: InputUserName,
+			isLogined: true, 
+			userFavorites: []
+		};
+		
 		if (!userDataStr) {
 			console.log('пусто');
 			console.log('создаю новый профиль');
 			// Сохраняем данные пользователя как объект
-			const userData = {
-				name: InputUserName,
-				isLogined: true, 
-				userFavorites: []
-			};
+			
 			localStorage.setItem(InputUserName, JSON.stringify(userData));
-			jwt();
 			console.log('новый профиль создан');
 		} else {
 			console.log('профиль найден');
 			const userData = JSON.parse(userDataStr);
 			userData.isLogined = true; 
 			localStorage.setItem(InputUserName, JSON.stringify(userData));
-			jwt();
+			
 		}
+		jwt();
 		localStorage.setItem('lastLoggedInUser', InputUserName);
 		setIsLogined(true);
 		//чтобы обновить глобальный UserName
 		setUserName(InputUserName);
+		dispatch(favoritesSlice.actions.loadFavorites(userData.userFavorites));
 	}
+
+	useEffect(() => {
+		const userName = localStorage.getItem('lastLoggedInUser');
+		if (userName) {
+			const userFilms = JSON.parse(userName);
+			dispatch(loadFavorites(userFilms));
+
+		}
+	}, [ dispatch]);
 
 	const loginMessage = isLogined ? (
 		<Paragrah text={'Success'} />

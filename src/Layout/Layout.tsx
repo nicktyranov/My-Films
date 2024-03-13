@@ -4,25 +4,27 @@ import cl from 'classnames';
 import loginIcon from '../assets/images/login.svg';
 import userIcon from '../assets/images/user.svg';
 import { useUserContext } from '../context/user.context';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { resetFavorites } from '../store/favoritesSlice';
 
 
 export function Layout() {
-	const { userName, isLogined, setIsLogined } = useUserContext();
+	const { userName, isLogined, logout } = useUserContext();
+	const dispatch = useDispatch();
 	console.log(userName);
-	const filmNum = 2;
-    
+
+	const filmNum = useSelector((state: RootState) => {
+		console.log(state.favorites.items);
+		if (!state.favorites.items) {
+			return 0;
+		}
+		return state.favorites.items.length;
+	});
+
 	const handleLoginClick = () => {
-		let userDataStr;
-		if (isLogined && userName) {
-			userDataStr = localStorage.getItem(userName);
-		}
-						
-		if (userDataStr) {
-			const userData = JSON.parse(userDataStr);
-			userData.isLogined = false;
-			localStorage.setItem(userName, JSON.stringify(userData));
-		}
-		setIsLogined(false);
+		logout();
+		dispatch(resetFavorites());
 	};
 
 	const menuLoginContent = isLogined ? (
@@ -71,7 +73,10 @@ export function Layout() {
 							[styles['menu-item-active']] : isActive
 						})}>
 						Мои фильмы
-						<span className={styles['filmNum']}>{filmNum}</span>
+						{isLogined
+							? <span className={styles['filmNum']}>{filmNum}</span>
+							: null
+						}
 					</NavLink>
 					{userNameMenu}
 					{menuLoginContent}
