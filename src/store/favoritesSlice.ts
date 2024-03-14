@@ -86,9 +86,21 @@ export const favoritesSlice = createSlice({
 			const initialStateUser = initialStateValue(); // Это ваша функция загрузки начального состояния
 			state.items = initialStateUser.items;
 		},
-		loadFavorites: (state, action: PayloadAction<FavoriteItem[]>) => {
-			state.items = action.payload;
-			
+		loadFavorites: (state) => {
+			const userName = localStorage.getItem('lastLoggedInUser');
+			if (!userName) {
+				return;
+			}
+			//получаем строку
+			const existData = localStorage.getItem(userName);
+			if (!existData) {
+				return;
+			}
+			//преобразуем в объект
+			const data = JSON.parse(existData);
+			console.log(data);
+			console.log(data.userFavorites);
+			state.items = data.userFavorites;
 		}
 	}
 	

@@ -1,5 +1,5 @@
 
-import  { useState, useRef, ChangeEvent, useEffect } from 'react'; 
+import  { useState, useRef, ChangeEvent } from 'react'; 
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
@@ -7,7 +7,7 @@ import Paragrah from '../Paragrah/Paragrah';
 import { useUserContext } from '../../context/user.context';
 import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { favoritesSlice, loadFavorites } from '../../store/favoritesSlice';
+import { favoritesSlice } from '../../store/favoritesSlice';
 
 const headingText = 'Login';
 const placeholder = 'Enter your name';
@@ -60,17 +60,8 @@ function Login() {
 		setIsLogined(true);
 		//чтобы обновить глобальный UserName
 		setUserName(InputUserName);
-		dispatch(favoritesSlice.actions.loadFavorites(userData.userFavorites));
+		dispatch(favoritesSlice.actions.loadFavorites());
 	}
-
-	useEffect(() => {
-		const userName = localStorage.getItem('lastLoggedInUser');
-		if (userName) {
-			const userFilms = JSON.parse(userName);
-			dispatch(loadFavorites(userFilms));
-
-		}
-	}, [ dispatch]);
 
 	const loginMessage = isLogined ? (
 		<Paragrah text={'Success'} />
