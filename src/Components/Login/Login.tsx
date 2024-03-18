@@ -5,6 +5,9 @@ import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
 import Paragrah from '../Paragrah/Paragrah';
 import { useUserContext } from '../../context/user.context';
+import { Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { favoritesSlice } from '../../store/favoritesSlice';
 
 const headingText = 'Login';
 const placeholder = 'Enter your name';
@@ -13,7 +16,16 @@ const textButton = 'Login';
 function Login() {
 	const buttonLoginRef = useRef(null);
 	const [InputUserName, setInputUserName] = useState(''); 
-	const {isLogined, setIsLogined, setUserName } = useUserContext();
+	const { isLogined, setIsLogined, setUserName } = useUserContext();
+	const dispatch = useDispatch();
+
+	function jwt() {
+		const expiresIn = 24 * 60 * 60 * 1000; // Срок действия 1 день в миллисекундах
+		const expirationTime = new Date().getTime() + expiresIn;
+		localStorage.setItem('jwt', JSON.stringify({
+			'jwt_expiration': expirationTime
+		}));
+	}
 
 	function onClick() {
 		if (!InputUserName.trim()) {
@@ -23,15 +35,17 @@ function Login() {
 		console.log(InputUserName);
 		const userDataStr = localStorage.getItem(InputUserName);
 
+		const userData = {
+			name: InputUserName,
+			isLogined: true, 
+			userFavorites: []
+		};
+		
 		if (!userDataStr) {
 			console.log('пусто');
 			console.log('создаю новый профиль');
 			// Сохраняем данные пользователя как объект
-			const userData = {
-				name: InputUserName,
-				isLogined: true, 
-				userFavorites: []
-			};
+			
 			localStorage.setItem(InputUserName, JSON.stringify(userData));
 			console.log('новый профиль создан');
 		} else {
@@ -39,11 +53,14 @@ function Login() {
 			const userData = JSON.parse(userDataStr);
 			userData.isLogined = true; 
 			localStorage.setItem(InputUserName, JSON.stringify(userData));
+			
 		}
+		jwt();
 		localStorage.setItem('lastLoggedInUser', InputUserName);
 		setIsLogined(true);
 		//чтобы обновить глобальный UserName
 		setUserName(InputUserName);
+		dispatch(favoritesSlice.actions.loadFavorites());
 	}
 
 	const loginMessage = isLogined ? (
@@ -52,6 +69,10 @@ function Login() {
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		setInputUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
+	}
+
+	if (isLogined) {
+		return <Navigate to='/'/>;
 	}
 
 	return (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import cl from 'classnames';
 import styles from './Card.module.css';
@@ -7,11 +7,26 @@ import likeIcon from '../../assets/like.svg';
 import starIcon from '../../assets/star.svg';
 import { CardProps } from './Card.props';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToFavorites } from '../../store/favoritesSlice';
+import { useUserContext } from '../../context/user.context';
+import { RootState } from '../../store/store';
 
 const backupImg = '/public/backUpImage.jpg';
 
 function Card({ id, inFavorites, img, rating, title }:CardProps) {
 	const [isInFavorites, setIsInFavorites] = useState(inFavorites);
+	const { userName, isLogined } = useUserContext();
+	const dispatch = useDispatch();
+	const favoritesData = useSelector((state: RootState)=> state.favorites.items);
+
+	useEffect(() => {
+		const isFilmInFavorites = favoritesData.some((film) => film.id === id);
+		setIsInFavorites(isFilmInFavorites);
+	}, [id, favoritesData]);
+	// function setIsInFavorites(id){
+	// 	return favoritesData.some((film) => film.id === id);
+	// }
 
 	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
 	const textFavorite = isInFavorites ? 'В избранном' : 'В избранное';
@@ -20,6 +35,7 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 		[styles.favorites]: true,
 		[styles.inFavorites]: isInFavorites
 	});
+
 
 	return (
 		<>
@@ -42,7 +58,14 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 
 					<div className={styles['card-text']}>
 						<h2 className={styles['heading-film']}>{title}</h2>
-						<div className={classNameFavorites}>
+						<div
+							className={classNameFavorites}
+							onClick={(e) => {
+								e.preventDefault();
+								dispatch(addToFavorites({title, rating, img, id, userName}));
+								console.log([title, rating, img, userName, isLogined]);
+								
+							}}>
 							<img src={iconFavorite} alt="like/dislike icon" />
 							{textFavorite}
 						</div>
