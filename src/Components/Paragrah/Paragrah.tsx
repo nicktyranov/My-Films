@@ -1,10 +1,10 @@
-import styles from './Paragrah.module.css';
+
 import { ParagrahProps } from './Paragrah.props';
 
-function Paragrah({text}: ParagrahProps) {
+function Paragrah({text, className}: ParagrahProps) {
 	
 	return (
-		<p className={styles.text}>{text }</p>
+		<p className={className}>{text }</p>
 	);
 }
 

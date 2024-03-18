@@ -7,7 +7,7 @@
   max-height: 520px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  /* gap: 24px; */
 
   border-radius: 12px;
   background: rgba(32, 40, 62, 0.8);

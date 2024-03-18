@@ -2,7 +2,12 @@
   font-family: "Poppins", sans-serif;
 
   --color-heading: #ebeef5;
+
+  --color-text: #8e95a9;
   --color-menu-item: #a8aebf;
+  --color-movie-info-labels: #767e94;
+  --color-movie-info-data: #c3c8d4;
+
   --color-bg-filmNum: #7b6ef6;
 
   background-color: #492c66;
@@ -16,6 +21,7 @@
 * {
   font-family: "Poppins", sans-serif;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
