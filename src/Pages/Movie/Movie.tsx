@@ -14,10 +14,13 @@ import { favoritesSlice } from '../../store/favoritesSlice';
 
 export function Movie() {
 	const data = useLoaderData() as { data: MovieInterface };
-
+	
+	
 	const dispatch = useDispatch();
 	const [isInFavorites, setIsInFavorites] = useState(false);
+	const userName = useSelector((s:RootState) => s.user.userName);
 	const favoritesData = useSelector((state: RootState) => state.favorites.items);
+	// Свойство "imdbId" не существует в типе "{ data: MovieInterface; }".
 	const id = data.imdbId as string;
 	const classNameFavorites = cl({
 		[styles.favorites]: true,
@@ -32,6 +35,7 @@ export function Movie() {
 	}, [id, favoritesData]);
 
 	console.log(data);
+	
 	//не могу решить проблему
 	// Свойство "short" не существует в типе "{ data: MovieInterface; }".
 	// console.log(data.short);
@@ -105,7 +109,6 @@ export function Movie() {
 	return <>
 		{data ? (
 			<div>
-				{/* Movie – {data.short.name} */}
 				<div className={styles['header']}>
 					<div className={styles['menu-name']}>Поиск фильмов</div>
 					<Heading

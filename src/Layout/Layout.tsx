@@ -1,17 +1,24 @@
 import styles from './Layout.module.css';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet} from 'react-router-dom';
 import cl from 'classnames';
 import loginIcon from '../assets/images/login.svg';
 import userIcon from '../assets/images/user.svg';
-import { useUserContext } from '../context/user.context';
+// import { useUserContext } from '../context/user.context';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { resetFavorites } from '../store/favoritesSlice';
+import { userSlice } from '../store/userSlice';
+import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 
 export function Layout() {
-	const { userName, isLogined, logout } = useUserContext();
 	const dispatch = useDispatch();
+	
+	const userName = useSelector((state: RootState) => state.user.userName);
+	const isLogined = useSelector((state: RootState) => {return state.user.isLogined;} );
+
 	console.log(userName);
 
 	const filmNum = useSelector((state: RootState) => {
@@ -23,9 +30,17 @@ export function Layout() {
 	});
 
 	const handleLoginClick = () => {
-		logout();
+		dispatch(userSlice.actions.logout());
 		dispatch(resetFavorites());
+		
+		
 	};
+
+	useEffect(() => {
+		if (!isLogined) {
+			<Navigate to='/login' replace />;
+		}
+	}, [isLogined, userName]);
 
 	const menuLoginContent = isLogined ? (
 		<NavLink

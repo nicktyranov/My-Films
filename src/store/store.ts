@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import favoritesSlice from './favoritesSlice';
+import userSlice from './userSlice';
 
 export const store = configureStore({
 	reducer: {
-		favorites: favoritesSlice
+		favorites: favoritesSlice,
+		user: userSlice
 	}
 });
 
