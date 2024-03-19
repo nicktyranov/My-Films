@@ -26,7 +26,6 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 		setIsInFavorites(isFilmInFavorites);
 	}, [id, favoritesData]);
 	
-
 	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
 	const textFavorite = isInFavorites ? 'В избранном' : 'В избранное';
 
@@ -34,7 +33,6 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 		[styles.favorites]: true,
 		[styles.inFavorites]: isInFavorites
 	});
-
 
 	return (
 		<>
@@ -48,8 +46,9 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 							target.src = backupImg;
 						}}
 						className={styles['card-poster']}
-						alt={title} />
-				
+						alt={title}
+					/>
+					
 					<div className={styles.rating}>
 						<img src={starIcon} alt="rating icon" />
 						<span className={styles.ratingNum}>{rating}</span>

@@ -20,6 +20,8 @@
   border-radius: 8px;
   height: 100%;
   min-height: 400px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .rating {
@@ -78,3 +80,7 @@
 .inFavorites {
   color: #37d8a7;
 }
+
+/* .img {
+  background-image: ;
+} */

@@ -12,14 +12,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { favoritesSlice } from '../../store/favoritesSlice';
 
+const backupImg = '/public/backUpImage.jpg';
+
 export function Movie() {
 	const data = useLoaderData() as { data: MovieInterface };
-	
 	
 	const dispatch = useDispatch();
 	const [isInFavorites, setIsInFavorites] = useState(false);
 	const userName = useSelector((s:RootState) => s.user.userName);
 	const favoritesData = useSelector((state: RootState) => state.favorites.items);
+
 	// Свойство "imdbId" не существует в типе "{ data: MovieInterface; }".
 	const id = data.imdbId as string;
 	const classNameFavorites = cl({
@@ -29,16 +31,18 @@ export function Movie() {
 
 	console.log(id);
 	console.log(typeof id);
+
 	useEffect(() => {
 		const isFilmInFavorites = favoritesData.some((film) => film.id === id);
 		setIsInFavorites(isFilmInFavorites);
 	}, [id, favoritesData]);
 
 	console.log(data);
-	
+
 	//не могу решить проблему
 	// Свойство "short" не существует в типе "{ data: MovieInterface; }".
 	// console.log(data.short);
+
 	const { short } = data;
 	console.log(short);
 
@@ -97,12 +101,14 @@ export function Movie() {
 	const reviewText = (() => {
 		return short?.review?.reviewBody || 'No reviews, sorry';
 	})();
-
+	
+	// Параметр "e" неявно имеет тип "any".ts(7006)
+	// (parameter) e: any
 	const favoriteToggle = (e) => {
 		e.preventDefault();
 		dispatch(favoritesSlice.actions.addToFavorites({title, rating, img, id, userName}));
 	};
-	// const isInFavorites = false;
+	
 	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
 	const textFavorite = isInFavorites ? 'В избранном' : 'В избранное';
 
@@ -118,7 +124,15 @@ export function Movie() {
 				</div>
 				<div className={styles['content']}>
 					<div >
-						<img src={img} alt={ headingText} className={styles['poster']} />
+						<img
+							src={img || backupImg}
+							onError={(e) => {
+								const target = e.target as HTMLImageElement; 
+								target.onerror = null; // Это предотвратит повторное срабатывание onError
+								target.src = backupImg;
+							}}
+							alt={headingText}
+							className={styles['poster']} />
 					</div>
 					<div className={styles['film-info']}>
 						<div className={styles['info-section-wrapper']}>

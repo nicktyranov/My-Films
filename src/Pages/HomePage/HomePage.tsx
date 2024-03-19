@@ -57,8 +57,7 @@ export function HomePage({isError}:{isError?:boolean}) {
 		
 		{	isError
 			&& <Heading headingText='Oops... Nothing found' level={2} appearance='small' />}
-
-
+		
 		{	!isLoading
 			&& recievedResults
 			&& <FilmList films={films} />}

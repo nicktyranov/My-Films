@@ -10,7 +10,9 @@
 
   --color-bg-filmNum: #7b6ef6;
 
-  background-color: #492c66;
+  background: rgba(12, 16, 32, 1);
+  background-image: url(./background.svg);
+  background-size: cover;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
