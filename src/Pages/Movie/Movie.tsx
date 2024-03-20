@@ -15,57 +15,41 @@ import { favoritesSlice } from '../../store/favoritesSlice';
 const backupImg = '/public/backUpImage.jpg';
 
 export function Movie() {
-	const data = useLoaderData() as { data: MovieInterface };
+	const data = useLoaderData() as MovieInterface;
 	
 	const dispatch = useDispatch();
 	const [isInFavorites, setIsInFavorites] = useState(false);
 	const userName = useSelector((s:RootState) => s.user.userName);
 	const favoritesData = useSelector((state: RootState) => state.favorites.items);
 
-	// Свойство "imdbId" не существует в типе "{ data: MovieInterface; }".
 	const id = data.imdbId as string;
 	const classNameFavorites = cl({
 		[styles.favorites]: true,
 		[styles.inFavorites]: isInFavorites
 	});
-
-	console.log(id);
-	console.log(typeof id);
-
+	
 	useEffect(() => {
 		const isFilmInFavorites = favoritesData.some((film) => film.id === id);
 		setIsInFavorites(isFilmInFavorites);
 	}, [id, favoritesData]);
-
-	console.log(data);
-
-	//не могу решить проблему
-	// Свойство "short" не существует в типе "{ data: MovieInterface; }".
-	// console.log(data.short);
+	
 
 	const { short } = data;
-	console.log(short);
 
 	const headingText = short.name;
 	const title = headingText;
 
 	const img = short.image;
 	const description = short.description;
-	const rating = (() => {
-		const value = short.aggregateRating?.ratingValue;
-		return value || '5.6';
-	})();
+	const rating = short.aggregateRating?.ratingValue ?? '5.6';
 		
 	const typeMovie = short['@type'];
-	const createdDate =(() => {
-		const value = short?.datePublished;
-		return value || 'N/A';
-	})();
+	const createdDate = short?.datePublished ?? 'N/A';
 
 	const duration = convertDuration();
 
 	//ковнвектор продолжительности фильма
-	function convertDuration() {
+	function convertDuration(): string {
 		//"PT2H26M"
 		let duration = short?.duration;
 		if (!duration) {
@@ -78,8 +62,8 @@ export function Movie() {
 		let temp = '';
 
 		for (let i = 0; i < duration.length; i++) {
-		// Проверка, является ли текущий символ числом
-			if (!isNaN(duration[i])) {
+			// Проверка, является ли текущий символ числом
+			if (!isNaN(parseInt(duration[i]))) {
 				temp += duration[i]; 
 			} else {
 				if (duration[i] === 'H') {
@@ -98,13 +82,9 @@ export function Movie() {
 
 	const reviewDate = short?.review?.dateCreated;
 	const reviewHeading = short?.review?.name;
-	const reviewText = (() => {
-		return short?.review?.reviewBody || 'No reviews, sorry';
-	})();
+	const reviewText = short?.review?.reviewBody ?? 'No reviews, sorry';
 	
-	// Параметр "e" неявно имеет тип "any".ts(7006)
-	// (parameter) e: any
-	const favoriteToggle = (e) => {
+	const favoriteToggle = (e: React.MouseEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		dispatch(favoritesSlice.actions.addToFavorites({title, rating, img, id, userName}));
 	};
