@@ -1,35 +1,38 @@
 
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { RequireAuthProps } from './RequireAuth.props';
-import { useUserContext } from '../../context/user.context';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { userSlice } from '../../store/userSlice';
+import { useEffect } from 'react';
 
 export function RequireAuth ({ children }: RequireAuthProps) {
-	const { isLogined, setIsLogined, setUserName } = useUserContext();
-	if (!isLogined) {
-		console.log('Запускаю проверку JWT');
-		const isValidJWT = checkJWTexpirationTime();
+	const isLogined = useSelector((state: RootState) => state.user.isLogined);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-		if (isValidJWT) {
+	useEffect(() => {
+		if (!isLogined && !checkJWTexpirationTime()) {
+			console.log('Нет JWT или JWT просрочен: перенаправление на страницу входа.');
+			clearJwt();
+			navigate('/login', { replace: true });
+		} else if (!isLogined && checkJWTexpirationTime()) {
 			const currentUser = localStorage.getItem('lastLoggedInUser');
+			
 			if (currentUser) {
-				setUserName(currentUser);
-				setIsLogined(true);
-				console.log('JWT действителен: пользователь авторизован.');
-				return children;
+				dispatch(userSlice.actions.login({ inputUserName: currentUser }));
 			} else {
-				console.log('Нет сохранённого пользователя: перенаправление на страницу входа.');
+				console.log('JWT действителен, но нет сохранённого пользователя: перенаправление на страницу входа.');
 				clearJwt();
+				navigate('/login', { replace: true });
 			}
 		}
-		console.log('Нет JWT (JWT просрочен): перенаправление на страницу входа.');
-		return <Navigate to='/login' replace />;
-	}
+	}, [isLogined, dispatch, navigate]);
 
-	console.log('JWT найден: пользователь авторизован.');
+	// Возвращаем children без условия, так как условие редиректа обрабатывается в useEffect
 	return children;
-
 }
-
 
 function clearJwt() {
 	console.log('Clear JWT: перенаправление на страницу входа.');

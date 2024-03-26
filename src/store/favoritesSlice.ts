@@ -3,13 +3,13 @@ import { RootState } from './store';
 
 
 export interface FavoriteItem {
-	key: string;
+	key?: string;
 	id: string;
 	img: string;
 	rating: string | number;
 	title: string;
 	userName: string;
-	inFavorites: boolean;
+	inFavorites?: boolean;
 }
 
 export type Favorites = {

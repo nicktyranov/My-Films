@@ -9,14 +9,15 @@ import { CardProps } from './Card.props';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToFavorites } from '../../store/favoritesSlice';
-import { useUserContext } from '../../context/user.context';
 import { RootState } from '../../store/store';
 
 const backupImg = '/public/backUpImage.jpg';
 
 function Card({ id, inFavorites, img, rating, title }:CardProps) {
 	const [isInFavorites, setIsInFavorites] = useState(inFavorites);
-	const { userName, isLogined } = useUserContext();
+
+	const userName = useSelector((s: RootState) => s.user.userName);
+	const isLogined = useSelector((s: RootState) => s.user.isLogined);
 	const dispatch = useDispatch();
 	const favoritesData = useSelector((state: RootState)=> state.favorites.items);
 
@@ -24,10 +25,7 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 		const isFilmInFavorites = favoritesData.some((film) => film.id === id);
 		setIsInFavorites(isFilmInFavorites);
 	}, [id, favoritesData]);
-	// function setIsInFavorites(id){
-	// 	return favoritesData.some((film) => film.id === id);
-	// }
-
+	
 	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
 	const textFavorite = isInFavorites ? 'В избранном' : 'В избранное';
 
@@ -35,7 +33,6 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 		[styles.favorites]: true,
 		[styles.inFavorites]: isInFavorites
 	});
-
 
 	return (
 		<>
@@ -49,8 +46,9 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 							target.src = backupImg;
 						}}
 						className={styles['card-poster']}
-						alt={title} />
-				
+						alt={title}
+					/>
+					
 					<div className={styles.rating}>
 						<img src={starIcon} alt="rating icon" />
 						<span className={styles.ratingNum}>{rating}</span>

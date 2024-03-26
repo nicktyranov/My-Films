@@ -1,4 +1,4 @@
-// import styles from './HomePage.module.css';
+import styles from './HomePage.module.css';
 
 import FilmList from '../../Components/FilmList/FilmList';
 import Heading from '../../Components/Heading/Heading';
@@ -40,9 +40,11 @@ export function HomePage({isError}:{isError?:boolean}) {
 		return; 
 	};
 
-	return <div>
+	return <div className={styles['content-wrapper']}>
 		<Heading headingText='Search' level={1} appearance='big'/>
-		<Paragrah text = {text} />
+		<Paragrah
+			text={text}
+			className={styles['text']} />
 		<div>
 			<InputSearch onSearch={ handleSearch} />
 		</div>
@@ -55,8 +57,7 @@ export function HomePage({isError}:{isError?:boolean}) {
 		
 		{	isError
 			&& <Heading headingText='Oops... Nothing found' level={2} appearance='small' />}
-
-
+		
 		{	!isLoading
 			&& recievedResults
 			&& <FilmList films={films} />}
