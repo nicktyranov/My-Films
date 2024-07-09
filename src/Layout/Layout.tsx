@@ -1,5 +1,5 @@
 import styles from './Layout.module.css';
-import { NavLink, Outlet} from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import cl from 'classnames';
 import loginIcon from '../assets/images/login.svg';
 import userIcon from '../assets/images/user.svg';
@@ -11,13 +11,13 @@ import { userSlice } from '../store/userSlice';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-
-
 export function Layout() {
 	const dispatch = useDispatch();
-	
+
 	const userName = useSelector((state: RootState) => state.user.userName);
-	const isLogined = useSelector((state: RootState) => {return state.user.isLogined;} );
+	const isLogined = useSelector((state: RootState) => {
+		return state.user.isLogined;
+	});
 
 	console.log(userName);
 
@@ -32,40 +32,44 @@ export function Layout() {
 	const handleLoginClick = () => {
 		dispatch(userSlice.actions.logout());
 		dispatch(resetFavorites());
-		
-		
 	};
 
 	useEffect(() => {
 		if (!isLogined) {
-			<Navigate to='/login' replace />;
+			<Navigate to="/login" replace />;
 		}
 	}, [isLogined, userName]);
 
 	const menuLoginContent = isLogined ? (
 		<NavLink
 			to={'/'}
-			className={({ isActive }) => cl(styles['menu-item'], {
-				[styles['menu-item-active']] : isActive
-			})}
-			onClick={handleLoginClick}>
-            Выйти
+			className={({ isActive }) =>
+				cl(styles['menu-item'], {
+					[styles['menu-item-active']]: isActive
+				})
+			}
+			onClick={handleLoginClick}
+		>
+         Выйти
 		</NavLink>
 	) : (
 		<NavLink
 			to={'/login'}
-			className={({ isActive }) => cl(styles['menu-item'], {
-				[styles['menu-item-active']] : isActive
-			})}
-			onClick={handleLoginClick}>
-				Войти
+			className={({ isActive }) =>
+				cl(styles['menu-item'], {
+					[styles['menu-item-active']]: isActive
+				})
+			}
+			onClick={handleLoginClick}
+		>
+         Войти
 			<img src={loginIcon} alt="login-icon" />
 		</NavLink>
 	);
-    
+
 	const userNameMenu = isLogined ? (
 		<div className={styles['menu-item']}>
-			{userName} 
+			{userName}
 			<img src={userIcon} alt="User Icon" />
 		</div>
 	) : null;
@@ -73,25 +77,32 @@ export function Layout() {
 	return (
 		<div className={styles['layout']}>
 			<div className={styles.menu}>
-				<img src="/logo.svg" alt="Logo" />
+				<NavLink to={'/'}>
+					<img src="/logo.svg" alt="Logo" />
+				</NavLink>
 				<nav className={styles['menu-list']}>
 					<NavLink
 						to={'/'}
-						className={({ isActive }) => cl(styles['menu-item'], {
-							[styles['menu-item-active']] : isActive
-						})}>
-						Поиск фильмов
+						className={({ isActive }) =>
+							cl(styles['menu-item'], {
+								[styles['menu-item-active']]: isActive
+							})
+						}
+					>
+                  Поиск фильмов
 					</NavLink>
 					<NavLink
 						to={'/favotites'}
-						className={({ isActive }) => cl(styles['menu-item'], {
-							[styles['menu-item-active']] : isActive
-						})}>
-						Мои фильмы
-						{isLogined
-							? <span className={styles['filmNum']}>{filmNum}</span>
-							: null
+						className={({ isActive }) =>
+							cl(styles['menu-item'], {
+								[styles['menu-item-active']]: isActive
+							})
 						}
+					>
+                  Мои фильмы
+						{isLogined ? (
+							<span className={styles['filmNum']}>{filmNum}</span>
+						) : null}
 					</NavLink>
 					{userNameMenu}
 					{menuLoginContent}
@@ -101,8 +112,5 @@ export function Layout() {
 				<Outlet />
 			</div>
 		</div>
-		
 	);
 }
-
-

@@ -88,16 +88,19 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .favorites {
   display: flex;
   gap: 8px;
   align-items: center;
+  cursor: pointer;
 }
 
 .inFavorites {
   color: #37d8a7;
+  cursor: pointer;
 }
 
 .review-wrapper {
