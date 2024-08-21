@@ -5,6 +5,10 @@
   margin: 16px 0 100px;
 }
 
+.menu img{
+  cursor: pointer;
+}
+
 .menu-list {
   display: flex;
   gap: 48px;
