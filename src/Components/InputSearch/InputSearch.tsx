@@ -1,15 +1,18 @@
+import React, { useRef, useState, ChangeEvent, KeyboardEvent } from 'react';
 import Button from '../Button/Button';
 import styles from './InputSearch.module.css';
-import { useRef, useState } from 'react';
 import searchIcon from '../../assets/images/search.svg';
 
-function InputSearch({onSearch}) {
-	const inputSearchRef = useRef(null);
+interface InputSearchProps {
+    onSearch: (query: string) => void;
+}
 
-	const [inputValue, setInputValue] = useState();
-	
-	
-	const onChange = (e) => {
+const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
+	const inputSearchRef = useRef<HTMLButtonElement>(null);
+
+	const [inputValue, setInputValue] = useState<string>('');
+    
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 	};
 
@@ -17,12 +20,12 @@ function InputSearch({onSearch}) {
 		onSearch(inputValue);
 	};
 
-	const onEnter = (e) => {
+	const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
 			onSearch(inputValue);
 		}
 	};
-	
+    
 	return (
 		<div className={styles['search-wrapper']}>
 			<div className={styles['input-wrapper']}>
@@ -31,14 +34,13 @@ function InputSearch({onSearch}) {
 					type="text"
 					onChange={onChange}
 					onKeyDown={onEnter}
-					placeholder='Enter the name of the film' /> 
-				<img src={searchIcon} alt="search-icon"  />
+					placeholder="Enter the name of the film"
+				/>
+				<img src={searchIcon} alt="search-icon" />
 			</div>
-			<Button ref={inputSearchRef} onClick={onClick}/>
-		
+			<Button ref={inputSearchRef} onClick={onClick} />
 		</div>
-	
 	);
-}
+};
 
 export default InputSearch;
