@@ -2,10 +2,10 @@
 import Heading from '../../Components/Heading/Heading';
 import InputSearch from '../../Components/InputSearch/InputSearch';
 import Paragrah from '../../Components/Paragrah/Paragrah';
-// import styles from './Error.module.css';
+
 
 const text = (
-	<>Введите название фильма, сериала или мультфильма для поиска <br /> и добавления в избранное.</>
+	<>Enter the name of a movie, TV series or cartoon to search <br /> and add to favorites.</>
 );
 
 const handleSearch = (query: string) => {

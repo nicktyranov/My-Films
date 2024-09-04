@@ -9,7 +9,7 @@ import axios from 'axios';
 import { PREFIX } from '../../helpers/API';
 
 const text = (
-	<>Введите название фильма, сериала или мультфильма для поиска <br /> и добавления в избранное.</>
+	<>Enter the name of a movie, TV series or cartoon to search <br /> and add to favorites.</>
 );
 
 export function HomePage({isError}:{isError?:boolean}) {

@@ -1,6 +1,5 @@
 import FilmList from '../../Components/FilmList/FilmList';
 import Heading from '../../Components/Heading/Heading';
-// import styles from './Favotites.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { Film } from '../../Components/FilmList/FilmList.props';

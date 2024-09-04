@@ -1,4 +1,3 @@
-import styles from './Layout.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
 import cl from 'classnames';
 import loginIcon from '../assets/images/login.svg';
@@ -10,6 +9,7 @@ import { resetFavorites } from '../store/favoritesSlice';
 import { userSlice } from '../store/userSlice';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import styles from './Layout.module.css';
 
 export function Layout() {
 	const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export function Layout() {
 			}
 			onClick={handleLoginClick}
 		>
-         Выйти
+         Logout
 		</NavLink>
 	) : (
 		<NavLink
@@ -62,7 +62,7 @@ export function Layout() {
 			}
 			onClick={handleLoginClick}
 		>
-         Войти
+         Login
 			<img src={loginIcon} alt="login-icon" />
 		</NavLink>
 	);
@@ -89,7 +89,7 @@ export function Layout() {
 							})
 						}
 					>
-                  Поиск фильмов
+                  Film search
 					</NavLink>
 					<NavLink
 						to={'/favotites'}
@@ -99,7 +99,7 @@ export function Layout() {
 							})
 						}
 					>
-                  Мои фильмы
+                  My films
 						{isLogined ? (
 							<span className={styles['filmNum']}>{filmNum}</span>
 						) : null}
