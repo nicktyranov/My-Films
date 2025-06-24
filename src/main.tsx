@@ -23,7 +23,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <RequireAuth><HomePage/></RequireAuth>
+				element: <HomePage/>
 			},
 			{
 				path: '/login',
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/movie/:id',
-				element: <RequireAuth><Movie /></RequireAuth>,
+				element: <Movie />,
 				errorElement: <HomePage isError={true} />,
 				loader: async ({ params }) => {
 					try {
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '*',
-				element: <RequireAuth><HomePage isError={true}/></RequireAuth>
+				element: <HomePage isError={true}/>
 			}
 		]
 	}

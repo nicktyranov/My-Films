@@ -1,43 +1,76 @@
 import styles from './HomePage.module.css';
-
 import FilmList from '../../Components/FilmList/FilmList';
 import Heading from '../../Components/Heading/Heading';
 import InputSearch from '../../Components/InputSearch/InputSearch';
 import Paragrah from '../../Components/Paragrah/Paragrah';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import axios from 'axios';
 import { PREFIX } from '../../helpers/API';
+
+interface Film {
+  '#TITLE': string;
+  '#YEAR': number;
+  '#IMDB_ID': string;
+  '#RANK': number;
+  '#ACTORS': string;
+  '#AKA': string;
+  '#IMDB_URL': string;
+  '#IMDB_IV': string;
+  '#IMG_POSTER': string;
+  photo_width: number;
+  photo_height: number;
+}
 
 const text = (
 	<>Enter the name of a movie, TV series or cartoon to search <br /> and add to favorites.</>
 );
+const filmsLimit = 12;
 
 export function HomePage({isError}:{isError?:boolean}) {
-	const [films, setFilms] = useState([]);
+	const [films, setFilms] = useState<Film[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [recievedResults, setRecievedResults] = useState(true);
+	const [receivedResults, setReceivedResults] = useState(true);
+	const [searchParams, setSearchParams] = useSearchParams();
 
-	const handleSearch = async(searchQuery: number | string) => {
-		console.log(searchQuery);
-		try {
-			setIsLoading(true);
-			const {data} = await axios.get(`${PREFIX}/?q=${encodeURIComponent(searchQuery)}`);
-			console.log(data.description);
-			if (data.description.length < 1) {
-				console.log('nothing');
-				setRecievedResults(false);
-				setIsLoading(false);
-				return;
-			}
-			setRecievedResults(true);
-			setFilms(data.description);
-			setIsLoading(false);
-		} catch (e) {
-			console.error(e);
-			setRecievedResults(false);
-			setIsLoading(false);
+	const searchQuery = searchParams.get('q') || '';
+
+	useEffect(() => {
+		if (!searchQuery.trim()) {
+			setFilms([]);
+			setReceivedResults(false);
+			return;
 		}
-		return; 
+
+		const fetchData = async () => {
+			try {
+				setIsLoading(true);
+				const { data } = await axios.get(`${PREFIX}/?q=${encodeURIComponent(searchQuery)}`);
+				if (!data.description?.length) {
+					setReceivedResults(false);
+					setFilms([]);
+				} else {
+					const sortedResults: Film[] = [...data.description]
+						.filter(f => f['#RANK'] !== 0)
+						.sort((a, b) => b['#RANK'] - a['#RANK'])
+						.slice(0, filmsLimit);
+					setFilms(sortedResults);
+					setReceivedResults(true);
+				}
+			} catch (error) {
+				console.error(error);
+				setReceivedResults(false);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchData();
+	}, [searchQuery]);
+
+	const handleSearch = (query: string) => {
+		setSearchParams({ q: query });
 	};
 
 	return <div className={styles['content-wrapper']}>
@@ -49,17 +82,15 @@ export function HomePage({isError}:{isError?:boolean}) {
 			<InputSearch onSearch={ handleSearch} />
 		</div>
 		{	isLoading
-			&& <>Loading films...</>}
+			&& <p className='message-text'>Loading films...</p>}
+		
+		{!isLoading && (!receivedResults || isError) && (
+			<Heading headingText='Oops... Nothing found' level={2} appearance='small' />
+		)}
+
 		
 		{	!isLoading
-			&& !recievedResults
-			&& <Heading headingText='Oops... Nothing found' level={2} appearance='small' />}
-		
-		{	isError
-			&& <Heading headingText='Oops... Nothing found' level={2} appearance='small' />}
-		
-		{	!isLoading
-			&& recievedResults
+			&& receivedResults
 			&& <FilmList films={films} />}
 	</div>;
 	
