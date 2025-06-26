@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { favoritesSlice } from '../../store/favoritesSlice';
+import { Helmet } from 'react-helmet';
 
 const backupImg = '/public/backUpImage.jpg';
 
@@ -95,6 +96,10 @@ export function Movie() {
 	return <>
 		{data ? (
 			<div>
+				<Helmet>
+					<title>My Films | {headingText}</title>
+					<meta name="description" content={description} />
+				</Helmet>
 				<div className={styles['header']}>
 					<div className={styles['menu-name']}>Поиск фильмов</div>
 					<Heading

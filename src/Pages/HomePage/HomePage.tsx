@@ -8,6 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import axios from 'axios';
 import { PREFIX } from '../../helpers/API';
+import { Helmet } from 'react-helmet';
 
 interface Film {
   '#TITLE': string;
@@ -24,7 +25,7 @@ interface Film {
 }
 
 const text = (
-	<>Enter the name of a movie, TV series or cartoon to search <br /> and add to favorites.</>
+	<>Enter the name of a movie, TV series or cartoon to search and add to favorites.</>
 );
 const filmsLimit = 12;
 
@@ -74,6 +75,10 @@ export function HomePage({isError}:{isError?:boolean}) {
 	};
 
 	return <div className={styles['content-wrapper']}>
+		<Helmet>
+			<title>My Films</title>
+			<meta name="description" content="YSearch for movies using real-time IMDb data. Discover trending titles and save your favorites for later" />
+		</Helmet>
 		<Heading headingText='Search' level={1} appearance='big'/>
 		<Paragrah
 			text={text}

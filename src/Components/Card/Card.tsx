@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import cl from 'classnames';
 import styles from './Card.module.css';
 import bookmarkIcon from '../../assets/Bookmark.svg';
@@ -18,8 +17,8 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 
 	const userName = useSelector((s: RootState) => s.user.userName);
 	const isLogined = useSelector((s: RootState) => s.user.isLogined);
-	const dispatch = useDispatch();
 	const favoritesData = useSelector((state: RootState)=> state.favorites.items);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const isFilmInFavorites = favoritesData.some((film) => film.id === id);
@@ -27,7 +26,7 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 	}, [id, favoritesData]);
 	
 	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
-	const textFavorite = isInFavorites ? 'В избранном' : 'В избранное';
+	const textFavorite = isInFavorites ? 'In favorites' : 'To favorites';
 
 	const classNameFavorites = cl({
 		[styles.favorites]: true,
@@ -41,8 +40,8 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 					<img
 						src={img || backupImg}
 						onError={(e) => {
-							const target = e.target as HTMLImageElement; // Явное приведение типа
-							target.onerror = null; // Это предотвратит повторное срабатывание onError
+							const target = e.target as HTMLImageElement; 
+							target.onerror = null;
 							target.src = backupImg;
 						}}
 						className={styles['card-poster']}
@@ -60,9 +59,12 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 							className={classNameFavorites}
 							onClick={(e) => {
 								e.preventDefault();
+								if (!isLogined) {
+									return alert(
+										'You must sign in to add to favorites'
+									);
+								}
 								dispatch(addToFavorites({title, rating, img, id, userName}));
-								console.log([title, rating, img, userName, isLogined]);
-								
 							}}>
 							<img src={iconFavorite} alt="like/dislike icon" />
 							{textFavorite}
