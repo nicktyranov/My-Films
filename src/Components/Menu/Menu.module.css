@@ -1,7 +1,7 @@
 .menu {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin: 16px 0 100px;
 }
 
@@ -17,17 +17,19 @@
 }
 
 .menu-item {
+  cursor: pointer;
+
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
-  color: #a8aebf;
+
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
+  font-style: normal;
   line-height: 24px; /* 150% */
+  color: #a8aebf;
   letter-spacing: 0.32px;
-  cursor: pointer;
 }
 
 .menu-item:hover {
@@ -39,16 +41,18 @@
 }
 
 .filmNum {
-  color: #fff;
-  font-family: Poppins;
-  font-style: normal;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px; /* 171.429% */
-  letter-spacing: 0.28px;
-  background-color: #7b6ef6;
   width: 24px;
   height: 24px;
   border-radius: 50%;
+
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px; /* 171.429% */
+  color: #fff;
   text-align: center;
+  letter-spacing: 0.28px;
+
+  background-color: #7b6ef6;
 }

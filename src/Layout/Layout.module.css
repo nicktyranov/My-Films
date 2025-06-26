@@ -3,10 +3,12 @@
 }
 
 .menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
    text-wrap: nowrap;
 }
 
@@ -26,12 +28,13 @@
 
 .menu-logo--wrapper {
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 1px;
   grid-template-areas: "logo-img logo-heading"
   "logo-description logo-description";
+  grid-template-columns: repeat(2, auto);
+  gap: 1px;
   align-items: center;
   justify-content: center;
+
   color: var(--color-heading);
 }
 
@@ -43,15 +46,17 @@
 }
 
 .menu-list--mobile {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  transform: translateY(-10px);
+
   display: flex;
   flex-direction: column;
   gap: 5px;
   align-items:flex-end;
   justify-content: center;
-  position: absolute;
-  top: 60px;
-  right: 10px;
-  transform: translateY(-10px);
+
   transition: all 0.2s ease-in-out;
 }
 
@@ -61,19 +66,21 @@
 }
 
 .menu-item {
+  cursor: pointer;
+
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
-  color: var(--color-menu-item);
+
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
-  line-height: 24px; 
-  letter-spacing: 0.32px;
-  cursor: pointer;
+  font-style: normal;
+  line-height: 24px;
+  color: var(--color-menu-item);
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: capitalize; 
+  letter-spacing: 0.32px;
 }
 
 .menu-item:hover {
@@ -85,21 +92,23 @@
 }
 
 .filmNum {
-  color: #fff;
-  font-family: Poppins;
-  font-style: normal;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px; 
-  letter-spacing: 0.28px;
-  background-color: var(--color-bg-filmNum);
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  text-align: center;
+
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
+  color: #fff;
+  text-align: center; 
+  letter-spacing: 0.28px;
+
+  background-color: var(--color-bg-filmNum);
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .menu-list {
   gap: 20px;
   align-items: center;
@@ -112,16 +121,17 @@
 }
 }
 
-@media (max-width: 720px) {
+@media (width <= 720px) {
 .menu-item {
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px; 
-  letter-spacing: 0.32px;
   cursor: pointer;
+
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: capitalize; 
+  letter-spacing: 0.32px;
 }
 
   .menu-list {
