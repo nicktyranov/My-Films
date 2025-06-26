@@ -37,6 +37,10 @@ button {
   border: none;
 }
 
+input {
+  width: 100%;
+}
+
 .message-text {
   color: var(--color-heading);
   font-size: 1.2rem;
