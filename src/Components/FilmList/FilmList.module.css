@@ -1,19 +1,21 @@
 .film-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
   gap: 16px;
   margin-bottom: 50px;
 }
 
-@media (max-width: 900) {
+@media (max-width: 800px) {
   .film-list {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 }
 
-@media (max-width:600) {
+@media (max-width:550px) {
   .film-list {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 10px;
   margin-bottom: 25px;
 }

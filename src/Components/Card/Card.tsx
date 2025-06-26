@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import cl from 'classnames';
 import styles from './Card.module.css';
 import bookmarkIcon from '../../assets/Bookmark.svg';
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToFavorites } from '../../store/favoritesSlice';
 import { RootState } from '../../store/store';
 
-const backupImg = '/public/backUpImage.jpg';
+const backupImg = '/backUpImage.jpg';
 
 function Card({ id, inFavorites, img, rating, title }:CardProps) {
 	const [isInFavorites, setIsInFavorites] = useState(inFavorites);
@@ -32,6 +32,15 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 		[styles.favorites]: true,
 		[styles.inFavorites]: isInFavorites
 	});
+
+	const handleFavoriteClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		if (!isLogined) {
+			alert('You must sign in to add to favorites');
+			return;
+		}
+		dispatch(addToFavorites({ title, rating, img, id, userName }));
+	}, [dispatch, isLogined, title, rating, img, id, userName]);
 
 	return (
 		<>
@@ -58,14 +67,7 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 						<div
 							className={classNameFavorites}
 							onClick={(e) => {
-								e.preventDefault();
-								if (!isLogined) {
-									return alert(
-										'You must sign in to add to favorites'
-									);
-								}
-								dispatch(addToFavorites({title, rating, img, id, userName}));
-							}}>
+								handleFavoriteClick(e);}}>
 							<img src={iconFavorite} alt="like/dislike icon" />
 							{textFavorite}
 						</div>

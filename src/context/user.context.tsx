@@ -1,9 +1,8 @@
-
 import { createContext, useState, useContext, ReactNode } from 'react';
 import { useDispatch } from 'react-redux';
 import { favoritesSlice} from '../store/favoritesSlice';
 
-// Определение интерфейса для контекста
+
 interface CurrentUserContextType {
 	isLogined: boolean;
 	setIsLogined: (isLogined: boolean) => void;
@@ -23,8 +22,6 @@ export const CurrentUserContext = createContext<CurrentUserContextType>({
 
 export const useUserContext = () => useContext(CurrentUserContext);
 
-
-// Типизация пропсов для провайдера
 interface CurrentUserProviderProps {
   children: ReactNode;
 }
@@ -45,9 +42,9 @@ export const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
 			userData.isLogined = false;
 			localStorage.setItem(userName, JSON.stringify(userData));
 		}
-		clearJwt(); // Удаление JWT из localStorage
-		setIsLogined(false); // Сброс состояния авторизации
-		setUserName(''); // Сброс имени пользователя
+		clearJwt();
+		setIsLogined(false); 
+		setUserName(''); 
 		dispatch(favoritesSlice.actions.resetFavorites());
 	};
 	
@@ -59,6 +56,5 @@ export const CurrentUserProvider = ({ children }: CurrentUserProviderProps) => {
 };
 
 function clearJwt() {
-	console.log('Clear JWT: перенаправление на страницу входа.');
 	return localStorage.removeItem('jwt');
 }

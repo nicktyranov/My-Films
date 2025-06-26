@@ -13,7 +13,7 @@ import { RootState } from '../../store/store';
 import { favoritesSlice } from '../../store/favoritesSlice';
 import { Helmet } from 'react-helmet';
 
-const backupImg = '/public/backUpImage.jpg';
+const backupImg = '/backUpImage.jpg';
 
 export function Movie() {
 	const data = useLoaderData() as MovieInterface;
@@ -49,9 +49,9 @@ export function Movie() {
 
 	const duration = convertDuration();
 
-	//ковнвектор продолжительности фильма
+	//film duration converter
+	//"PT2H26M"
 	function convertDuration(): string {
-		//"PT2H26M"
 		let duration = short?.duration;
 		if (!duration) {
 			return 'Unknown';
@@ -63,7 +63,6 @@ export function Movie() {
 		let temp = '';
 
 		for (let i = 0; i < duration.length; i++) {
-			// Проверка, является ли текущий символ числом
 			if (!isNaN(parseInt(duration[i]))) {
 				temp += duration[i]; 
 			} else {
@@ -72,7 +71,6 @@ export function Movie() {
 				} else if (duration[i] === 'M') {
 					minutes = parseInt(temp);
 				}
-				// Сброс temp для следующего числового значения
 				temp = '';
 			}
 		}
@@ -91,7 +89,7 @@ export function Movie() {
 	};
 	
 	const iconFavorite = isInFavorites ? bookmarkIcon : likeIcon;
-	const textFavorite = isInFavorites ? 'В избранном' : 'В избранное';
+	const textFavorite = isInFavorites ? 'In favorites' : 'To favorites';
 
 	return <>
 		{data ? (
@@ -101,7 +99,7 @@ export function Movie() {
 					<meta name="description" content={description} />
 				</Helmet>
 				<div className={styles['header']}>
-					<div className={styles['menu-name']}>Поиск фильмов</div>
+					<div className={styles['menu-name']}>Film search</div>
 					<Heading
 						appearance='movie'
 						level={1}
@@ -113,7 +111,7 @@ export function Movie() {
 							src={img || backupImg}
 							onError={(e) => {
 								const target = e.target as HTMLImageElement; 
-								target.onerror = null; // Это предотвратит повторное срабатывание onError
+								target.onerror = null; 
 								target.src = backupImg;
 							}}
 							alt={headingText}
@@ -185,7 +183,7 @@ export function Movie() {
 				</div>
 			</div> 
 		) : (
-			'Loading...' 
+			<p className='message-text'>Loading...</p>
 		)}
 	</>;
 

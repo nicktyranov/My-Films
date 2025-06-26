@@ -15,8 +15,7 @@ export interface MovieInterface {
       name: string;
       reviewBody: string;
     };
-    // Добавьте здесь другие свойства, если они есть внутри 'short'
   };
-  imdbId: string; // Это свойство находится на том же уровне, что и 'short'
+  imdbId: string;
 }
   

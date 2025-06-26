@@ -79,7 +79,7 @@ export function HomePage({isError}:{isError?:boolean}) {
 			<title>My Films</title>
 			<meta name="description" content="YSearch for movies using real-time IMDb data. Discover trending titles and save your favorites for later" />
 		</Helmet>
-		<Heading headingText='Search' level={1} appearance='big'/>
+		<Heading headingText='Search' level={1} appearance='small'/>
 		<Paragrah
 			text={text}
 			className={styles['text']} />

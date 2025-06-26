@@ -1,4 +1,3 @@
-
 import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import styles from './FilmList.module.css';
@@ -10,11 +9,9 @@ function FilmList({ films}: FilmListProps) {
 	const favoritesData = useSelector((state: RootState)=> state.favorites.items);
 	
 	function checkFavorites(id:string) {
-		console.log('Checking favoritesData');
-		return favoritesData.some((films) => films.id === id);
+		return favoritesData.some((film) => film.id === id);
 	}
 
-	//ПРеобразуем названия полей (избавляемся от решетки)
 	const processedFilms = films.map(film => ({
 		title: film['#TITLE'], 
 		id: film['#IMDB_ID'],

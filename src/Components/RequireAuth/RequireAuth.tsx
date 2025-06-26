@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom';
 import { RequireAuthProps } from './RequireAuth.props';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +12,6 @@ export function RequireAuth ({ children }: RequireAuthProps) {
 
 	useEffect(() => {
 		if (!isLogined && !checkJWTexpirationTime()) {
-			console.log('Нет JWT или JWT просрочен: перенаправление на страницу входа.');
 			clearJwt();
 			navigate('/login', { replace: true });
 		} else if (!isLogined && checkJWTexpirationTime()) {
@@ -22,26 +20,21 @@ export function RequireAuth ({ children }: RequireAuthProps) {
 			if (currentUser) {
 				dispatch(userSlice.actions.login({ inputUserName: currentUser }));
 			} else {
-				console.log('JWT действителен, но нет сохранённого пользователя: перенаправление на страницу входа.');
 				clearJwt();
 				navigate('/login', { replace: true });
 			}
 		}
 	}, [isLogined, dispatch, navigate]);
 
-	// Возвращаем children без условия, так как условие редиректа обрабатывается в useEffect
 	return children;
 }
 
 function clearJwt() {
-	console.log('Clear JWT: перенаправление на страницу входа.');
 	return localStorage.removeItem('jwt');
 }
 
 function checkJWTexpirationTime() {
-	//загружаем из localStorage
 	const jwt = localStorage.getItem('jwt');
-	//распарсиваем
 	if (!jwt) {
 		return false;
 	}
