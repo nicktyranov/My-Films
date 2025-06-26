@@ -32,9 +32,18 @@ body {
   padding: 0 10px;
 }
 
+button {
+  background: none;
+  border: none;
+}
+
 .message-text {
   color: var(--color-heading);
   font-size: 1.2rem;
   text-align: center;
   margin-top: 2rem;
+}
+
+a {
+  text-decoration: none;
 }

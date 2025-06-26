@@ -84,14 +84,21 @@ export function HomePage({isError}:{isError?:boolean}) {
 		{	isLoading
 			&& <p className='message-text'>Loading films...</p>}
 		
-		{!isLoading && (!receivedResults || isError) && (
-			<Heading headingText='Oops... Nothing found' level={2} appearance='small' />
-		)}
+		
 
 		
 		{	!isLoading
 			&& receivedResults
 			&& <FilmList films={films} />}
+
+		{!isLoading && !isError && !receivedResults && (
+			<Heading headingText='Search for movies using real-time IMDb data. Discover trending titles and save your favorites for later.
+' level={4} appearance='smaller' />
+		)}
+
+		{!isLoading && (!receivedResults && isError) && (
+			<Heading headingText='Oops... Nothing found' level={2} appearance='small' />
+		)}
 	</div>;
 	
 }

@@ -7,7 +7,6 @@ import { useUserContext } from '../../context/user.context';
 
 function Menu() {
 	const { userName, isLogined, setIsLogined } = useUserContext();
-	console.log(userName);
 	const filmNum = 2;
 
 	const menuSearchClassName = cl({
@@ -31,11 +30,11 @@ function Menu() {
 
 	const menuLoginContent = isLogined ? (
 		<div className={styles['menu-item']} onClick={handleLoginClick}>
-            Выйти
+            Logout
 		</div>
 	) : (
 		<div className={styles['menu-item']} onClick={handleLoginClick}>
-            Войти <img src={loginIcon} alt="login-icon" />
+            Login <img src={loginIcon} alt="login-icon" />
 		</div>
 	);
     
@@ -48,10 +47,14 @@ function Menu() {
 
 	return (
 		<div className={styles.menu}>
-			<img src="/logo.svg" alt="Logo" />
+			<div>
+				<img src="/logo.svg" alt="Logo" />
+				<span>My Films</span>
+			</div>
+			
 			<nav className={styles['menu-list']}>
-				<div className={menuSearchClassName}>Поиск фильмов</div>
-				<div className={styles['menu-item']}>Мои фильмы <span className={styles['filmNum']}>{filmNum}</span></div>
+				<div className={menuSearchClassName}>Film Search</div>
+				<div className={styles['menu-item']}>Favorite Films <span className={styles['filmNum']}>{filmNum}</span></div>
 				{userNameMenu}
 				{menuLoginContent}
 			</nav>

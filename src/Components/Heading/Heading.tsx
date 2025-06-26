@@ -8,6 +8,7 @@ function Heading({ headingText = 'Search', level = 1, appearance, ...props }: He
 	const className = cl({
 		[styles['heading-big']]: appearance === 'big',
 		[styles['heading-small']]: appearance === 'small',
+		[styles['heading-smaller']]: appearance === 'smaller',
 		[styles['heading-movie']]: appearance === 'movie'
 	});
 

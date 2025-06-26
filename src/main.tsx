@@ -30,7 +30,7 @@ const router = createBrowserRouter([
 				element: <LoginPage/>
 			},
 			{
-				path: '/favotites',
+				path: '/favorites',
 				element: <RequireAuth><Favorites/></RequireAuth>
 			},
 			{
