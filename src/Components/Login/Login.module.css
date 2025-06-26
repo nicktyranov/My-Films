@@ -7,6 +7,7 @@
 
 .input_login {
   min-width: 312px;
+  max-width: 650px;
   height: 64px;
   padding: 12px 16px;
   border: 1px solid #323b54;
