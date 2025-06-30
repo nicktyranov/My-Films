@@ -16,12 +16,10 @@
   font-size: 14px;
   font-weight: 400;
   font-style: normal;
-  line-height: 16px; /* 114.286% */
+  line-height: 16px; 
   color: #fff;
 
   background: rgb(0 0 0 / 10%);
-
-  /* padding-left: 50px; */
 }
 
 .input_login::placeholder {

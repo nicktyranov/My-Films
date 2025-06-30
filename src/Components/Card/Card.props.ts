@@ -5,5 +5,5 @@ export interface CardProps extends HtmlHTMLAttributes<HTMLElement> {
 	inFavorites?: boolean,
 	img: string,
 	rating: string | number,
-	title: string
+	title: string,
 }

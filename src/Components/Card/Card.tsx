@@ -45,7 +45,7 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 	return (
 		<>
 			<Link to={`/movie/${id}`} className={styles.link}>
-				<div className={styles.card}>
+				<div className={styles.card} data-testid="card">
 					<img
 						src={img || backupImg}
 						onError={(e) => {
@@ -55,20 +55,21 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 						}}
 						className={styles['card-poster']}
 						alt={title}
+						data-testid="cardImg"
 					/>
 					
 					<div className={styles.rating}>
-						<img src={starIcon} alt="rating icon" />
-						<span className={styles.ratingNum}>{rating}</span>
+						<img src={starIcon} alt="rating icon" data-testid="starIcon"/>
+						<span className={styles.ratingNum} data-testid="ratingNum">{rating ?? '0'}</span>
 					</div>
 
 					<div className={styles['card-text']}>
-						<h2 className={styles['heading-film']}>{title}</h2>
+						<h2 className={styles['heading-film']} data-testid="cardHeading">{title}</h2>
 						<div
 							className={classNameFavorites}
 							onClick={(e) => {
-								handleFavoriteClick(e);}}>
-							<img src={iconFavorite} alt="like/dislike icon" />
+								handleFavoriteClick(e);}} data-testid="favoriteFn">
+							<img src={iconFavorite} alt="like/dislike icon"  data-testid="iconFavorite"/>
 							{textFavorite}
 						</div>
 					</div>
