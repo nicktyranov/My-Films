@@ -3,7 +3,7 @@ import  { useState, useRef, ChangeEvent } from 'react';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
-import Paragrah from '../Paragrah/Paragrah';
+import Paragraph from '../Paragraph/Paragraph';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { favoritesSlice } from '../../store/favoritesSlice';
@@ -30,7 +30,7 @@ function Login() {
 	}
 
 	const loginMessage = isLogined ? (
-		<Paragrah text={'Success'} />
+		<Paragraph text={'Success'} />
 	) : null;
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -42,7 +42,7 @@ function Login() {
 	}
 
 	return (
-		<div className={styles['login_wrapper']}>
+		<div className={styles['login_wrapper']} data-testid="loginForm">
 			<Heading headingText={headingText} level={1} appearance='big'/>
 			<input 
 				type="text" 

@@ -3,7 +3,7 @@ import cl from 'classnames';
 import styles from './Movie.module.css';
 import { MovieInterface } from '../../interfaces/Movie.interface';
 import Heading from '../../Components/Heading/Heading';
-import Paragrah from '../../Components/Paragrah/Paragrah';
+import Paragraph from '../../Components/Paragraph/Paragraph';
 import starIcon from '../../assets/star.svg';
 import bookmarkIcon from '../../assets/Bookmark.svg';
 import likeIcon from '../../assets/like.svg';
@@ -119,11 +119,11 @@ export function Movie() {
 					</div>
 					<div className={styles['film-info']}>
 						<div className={styles['info-section-wrapper']}>
-							<Paragrah
+							<Paragraph
 								text={'Description'}
 								className={styles['info-label']} />
 						
-							<Paragrah
+							<Paragraph
 								text={description}
 								className={styles['description']}/>
 						</div>
@@ -140,25 +140,25 @@ export function Movie() {
 							</div>
 						</div>
 						<div className={styles['info-section-wrapper']}>
-							<Paragrah
+							<Paragraph
 								text={'Type'}
 								className={styles['info-label']} />
 							{typeMovie}
 						</div>
 						<div className={styles['info-section-wrapper']}>
-							<Paragrah
+							<Paragraph
 								text={'Created'}
 								className={styles['info-label']} />
 							{createdDate}
 						</div>
 						<div className={styles['info-section-wrapper']}>
-							<Paragrah
+							<Paragraph
 								text={'Duration'}
 								className={styles['info-label']} />
 							{duration}
 						</div>
 						<div className={styles['info-section-wrapper']}>
-							<Paragrah
+							<Paragraph
 								text={'Genre'}
 								className={styles['info-label']} />
 							{genre}
@@ -167,17 +167,17 @@ export function Movie() {
 					</div>
 				</div>
 
-				<Paragrah text={'Reviews'} className={styles['info-label']}/>
+				<Paragraph text={'Reviews'} className={styles['info-label']}/>
 				<div className={styles['review-wrapper']}>
 					<div className={styles['review-info']}>
-						<Paragrah
+						<Paragraph
 							text={reviewHeading}
 							className={styles['review-heading']} />
-						<Paragrah
+						<Paragraph
 							text={reviewDate}
 							className={styles['review-date']}/>
 					</div>
-					<Paragrah
+					<Paragraph
 						text={reviewText}
 						className={styles['review-text']} />
 				</div>

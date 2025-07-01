@@ -1,7 +1,7 @@
 
 import Heading from '../../Components/Heading/Heading';
 import InputSearch from '../../Components/InputSearch/InputSearch';
-import Paragrah from '../../Components/Paragrah/Paragrah';
+import Paragraph from '../../Components/Paragraph/Paragraph';
 
 
 const text = (
@@ -15,7 +15,7 @@ const handleSearch = (query: string) => {
 export function Error() {
 	return <div>
 		<Heading headingText='Search' level={1} appearance='big' />
-		<Paragrah text={text} />
+		<Paragraph text={text} />
 		<InputSearch onSearch={handleSearch} />
 		<Heading headingText='Oops... Nothing found' level={2} appearance='small' />
 	</div>;

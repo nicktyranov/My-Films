@@ -1,6 +1,6 @@
 import { HtmlHTMLAttributes, ReactNode } from 'react';
 
-export interface ParagrahProps extends HtmlHTMLAttributes<HTMLElement>{
+export interface ParagraphProps extends HtmlHTMLAttributes<HTMLElement>{
 	text: ReactNode,
 	className?: string
 }

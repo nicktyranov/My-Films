@@ -2,7 +2,7 @@ import styles from './HomePage.module.css';
 import FilmList from '../../Components/FilmList/FilmList';
 import Heading from '../../Components/Heading/Heading';
 import InputSearch from '../../Components/InputSearch/InputSearch';
-import Paragrah from '../../Components/Paragrah/Paragrah';
+import Paragraph from '../../Components/Paragraph/Paragraph';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -80,7 +80,7 @@ export function HomePage({isError}:{isError?:boolean}) {
 			<meta name="description" content="YSearch for movies using real-time IMDb data. Discover trending titles and save your favorites for later" />
 		</Helmet>
 		<Heading headingText='Search' level={1} appearance='small'/>
-		<Paragrah
+		<Paragraph
 			text={text}
 			className={styles['text']} />
 		<div>
