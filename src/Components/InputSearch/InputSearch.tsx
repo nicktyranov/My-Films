@@ -35,10 +35,11 @@ const InputSearch: React.FC<InputSearchProps> = ({ onSearch }) => {
 					onChange={onChange}
 					onKeyDown={onEnter}
 					placeholder="Enter the name of the film"
+					data-testid="input"
 				/>
 				<img src={searchIcon} alt="search-icon" />
 			</div>
-			<Button ref={inputSearchRef} onClick={onClick} />
+			<Button ref={inputSearchRef} onClick={onClick} data-testid="button" />
 		</div>
 	);
 };

@@ -14,7 +14,6 @@ function Heading({ headingText = 'Search', level = 1, appearance, ...props }: He
 
 	const Tag = `h${level}`;
 
-	// Объединяем класс с другими пропсами
 	const elementProps = {
 		...props,
 		className: className
