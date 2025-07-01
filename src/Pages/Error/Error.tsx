@@ -1,4 +1,3 @@
-
 import Heading from '../../Components/Heading/Heading';
 import InputSearch from '../../Components/InputSearch/InputSearch';
 import Paragraph from '../../Components/Paragraph/Paragraph';
@@ -8,8 +7,8 @@ const text = (
 	<>Enter the name of a movie, TV series or cartoon to search <br /> and add to favorites.</>
 );
 
-const handleSearch = (query: string) => {
-	console.log('Search query:', query);
+const handleSearch = () => {
+	return;
 };
 
 export function Error() {

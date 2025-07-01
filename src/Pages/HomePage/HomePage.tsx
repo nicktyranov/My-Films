@@ -5,7 +5,6 @@ import InputSearch from '../../Components/InputSearch/InputSearch';
 import Paragraph from '../../Components/Paragraph/Paragraph';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-
 import axios from 'axios';
 import { PREFIX } from '../../helpers/API';
 import { Helmet } from 'react-helmet';
@@ -60,8 +59,7 @@ export function HomePage({isError}:{isError?:boolean}) {
 					setReceivedResults(true);
 				}
 			} catch (error) {
-				console.error(error);
-				setReceivedResults(false);
+				throw new Error(`${error}`);
 			} finally {
 				setIsLoading(false);
 			}

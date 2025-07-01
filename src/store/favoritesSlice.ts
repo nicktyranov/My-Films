@@ -35,8 +35,7 @@ const initialStateValue = (): Favorites => {
 		}
 
 	} catch (e) {
-		console.error(e);
-		return { items: [] }; 
+		throw new Error(`${e}`);
 	}
 };
 

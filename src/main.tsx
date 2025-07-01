@@ -8,11 +8,12 @@ import { LoginPage } from './Pages/LoginPage/LoginPage';
 import { Movie } from './Pages/Movie/Movie';
 import { HomePage } from './Pages/HomePage/HomePage';
 import { CurrentUserProvider } from './context/user.context';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { PREFIX } from './helpers/API';
 import { RequireAuth } from './Components/RequireAuth/RequireAuth';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import Modal from './Components/Modal/Modal';
 
 
 
@@ -40,15 +41,10 @@ const router = createBrowserRouter([
 				loader: async ({ params }) => {
 					try {
 						const response = await axios.get(`${PREFIX}?tt=${params.id}`);
-						console.log(response);
 						return response.data;
 					} catch (e) {
-						console.error(e);
-						if (e instanceof AxiosError){
-							if (e.message === 'Network Error') {
-								console.log('Network Error');
-							}
-						}
+						throw new Error(`${e}`);
+						
 					}
 				}
 			},
@@ -66,6 +62,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 		<Provider store={store}>
 			<CurrentUserProvider>
 				<RouterProvider router={router} />
+				<Modal/>
 			</CurrentUserProvider>
 		</Provider>
 	</React.StrictMode>

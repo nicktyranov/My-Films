@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { favoritesSlice } from '../../store/favoritesSlice';
 import { Helmet } from 'react-helmet';
+import { showModal } from '../../store/modalSlice';
 
 const backupImg = '/backUpImage.jpg';
 
@@ -21,6 +22,7 @@ export function Movie() {
 	const dispatch = useDispatch();
 	const [isInFavorites, setIsInFavorites] = useState(false);
 	const userName = useSelector((s:RootState) => s.user.userName);
+	const isLogined = useSelector((s:RootState) => s.user.isLogined);
 	const favoritesData = useSelector((state: RootState) => state.favorites.items);
 
 	const id = data.imdbId as string;
@@ -84,6 +86,9 @@ export function Movie() {
 	const reviewText = short?.review?.reviewBody ?? 'No reviews, sorry';
 	
 	const favoriteToggle = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (!isLogined){
+			return dispatch(showModal({message: 'Must be logined to add to favorites'}));
+		}
 		e.preventDefault();
 		dispatch(favoritesSlice.actions.addToFavorites({title, rating, img, id, userName}));
 	};
@@ -106,7 +111,7 @@ export function Movie() {
 						headingText={headingText}/>
 				</div>
 				<div className={styles['content']}>
-					<div >
+					<div className={styles['poster']}>
 						<img
 							src={img || backupImg}
 							onError={(e) => {

@@ -41,7 +41,7 @@ function checkJWTexpirationTime() {
 	const jwtObj = JSON.parse(jwt); // {jwt_expiration: 1709692987170}
 	const expirationTime =jwtObj['jwt_expiration'];
 	const currentTime = new Date().getTime();
-	console.log(currentTime);
+	
 
 	return expirationTime && currentTime <= parseInt(expirationTime);
 }

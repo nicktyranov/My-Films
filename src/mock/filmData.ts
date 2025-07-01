@@ -64,7 +64,4 @@ const filmData = [
 		title: 'Two And a Half Men',
 		inFavorites: false
 	}];
-
-
-console.log('загружен');
 export default filmData;

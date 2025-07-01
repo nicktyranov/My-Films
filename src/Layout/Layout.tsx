@@ -32,7 +32,6 @@ export function Layout() {
 	}, []);
 
 	const filmNum = useSelector((state: RootState) => {
-		console.log(state.favorites.items);
 		if (!state.favorites.items) {
 			return 0;
 		}

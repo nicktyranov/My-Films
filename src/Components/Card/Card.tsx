@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToFavorites } from '../../store/favoritesSlice';
 import { RootState } from '../../store/store';
+import { showModal } from '../../store/modalSlice';
 
 const backupImg = '/backUpImage.jpg';
 
@@ -36,8 +37,7 @@ function Card({ id, inFavorites, img, rating, title }:CardProps) {
 	const handleFavoriteClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		if (!isLogined) {
-			alert('You must sign in to add to favorites');
-			return;
+			return dispatch(showModal({message: 'Must be logined to add to favorites'}));
 		}
 		dispatch(addToFavorites({ title, rating, img, id, userName }));
 	}, [dispatch, isLogined, title, rating, img, id, userName]);

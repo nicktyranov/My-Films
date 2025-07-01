@@ -2,14 +2,12 @@ import { createContext, useState, useContext, ReactNode } from 'react';
 import { useDispatch } from 'react-redux';
 import { favoritesSlice} from '../store/favoritesSlice';
 
-
 interface CurrentUserContextType {
 	isLogined: boolean;
 	setIsLogined: (isLogined: boolean) => void;
 	userName: string;
 	setUserName: (userName: string) => void;
-	logout: () => void; 
-	
+	logout: () => void;
 }
 
 export const CurrentUserContext = createContext<CurrentUserContextType>({
