@@ -1,4 +1,3 @@
-
 import cl from 'classnames';
 import styles from './Menu.module.css';
 import loginIcon from '../../assets/images/login.svg';
@@ -13,13 +12,13 @@ function Menu() {
 		[styles['menu-item']]: true,
 		[styles['menu-item-active']]: true
 	});
-    
+
 	const handleLoginClick = () => {
 		let userDataStr;
 		if (isLogined && userName) {
 			userDataStr = localStorage.getItem(userName);
 		}
-						
+
 		if (userDataStr) {
 			const userData = JSON.parse(userDataStr);
 			userData.isLogined = false;
@@ -30,17 +29,17 @@ function Menu() {
 
 	const menuLoginContent = isLogined ? (
 		<div className={styles['menu-item']} onClick={handleLoginClick}>
-            Logout
+			Logout
 		</div>
 	) : (
 		<div className={styles['menu-item']} onClick={handleLoginClick}>
-            Login <img src={loginIcon} alt="login-icon" />
+			Login <img src={loginIcon} alt="login-icon" />
 		</div>
 	);
-    
+
 	const userNameMenu = isLogined ? (
 		<div className={styles['menu-item']}>
-			{userName} 
+			{userName}
 			<img src={userIcon} alt="User Icon" />
 		</div>
 	) : null;
@@ -51,10 +50,12 @@ function Menu() {
 				<img src="/logo.svg" alt="Logo" />
 				<span>My Films</span>
 			</div>
-			
+
 			<nav className={styles['menu-list']}>
 				<div className={menuSearchClassName}>Film Search</div>
-				<div className={styles['menu-item']}>Favorite Films <span className={styles['filmNum']}>{filmNum}</span></div>
+				<div className={styles['menu-item']}>
+					Favorite Films <span className={styles['filmNum']}>{filmNum}</span>
+				</div>
 				{userNameMenu}
 				{menuLoginContent}
 			</nav>

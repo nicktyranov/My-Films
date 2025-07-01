@@ -1,20 +1,19 @@
 .button {
-  cursor: pointer;
+	cursor: pointer;
 
-  padding: 16px 32px;
-  border: 2px solid #7b6ef6;
-  border-radius: 12px;
+	padding: 16px 32px;
+	border: 2px solid #7b6ef6;
+	border-radius: 12px;
 
-  /* font-family: Poppins; */
-  font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 24px;
-  color: #fff;
+	font-size: 16px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 24px;
+	color: #fff;
 
-  background: #7b6ef6;
+	background: #7b6ef6;
 }
 
 .button:hover {
-  background: #7266e4;
+	background: #7266e4;
 }

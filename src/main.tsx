@@ -15,8 +15,6 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Modal from './Components/Modal/Modal';
 
-
-
 const router = createBrowserRouter([
 	{
 		path: '/',
@@ -24,15 +22,19 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <HomePage/>
+				element: <HomePage />
 			},
 			{
 				path: '/login',
-				element: <LoginPage/>
+				element: <LoginPage />
 			},
 			{
 				path: '/favorites',
-				element: <RequireAuth><Favorites/></RequireAuth>
+				element: (
+					<RequireAuth>
+						<Favorites />
+					</RequireAuth>
+				)
 			},
 			{
 				path: '/movie/:id',
@@ -44,30 +46,24 @@ const router = createBrowserRouter([
 						return response.data;
 					} catch (e) {
 						throw new Error(`${e}`);
-						
 					}
 				}
 			},
 			{
 				path: '*',
-				element: <HomePage isError={true}/>
+				element: <HomePage isError={true} />
 			}
 		]
 	}
 ]);
-
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<CurrentUserProvider>
 				<RouterProvider router={router} />
-				<Modal/>
+				<Modal />
 			</CurrentUserProvider>
 		</Provider>
 	</React.StrictMode>
 );
-
-
-
-

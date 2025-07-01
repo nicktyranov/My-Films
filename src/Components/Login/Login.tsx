@@ -1,5 +1,4 @@
-
-import  { useState, useRef, ChangeEvent } from 'react'; 
+import { useState, useRef, ChangeEvent } from 'react';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import styles from './Login.module.css';
@@ -16,11 +15,11 @@ const textButton = 'Login';
 
 function Login() {
 	const buttonLoginRef = useRef(null);
-	const [inputUserName, setInputUserName] = useState(''); 
+	const [inputUserName, setInputUserName] = useState('');
 	const dispatch = useDispatch();
 
 	const isLogined = useSelector((state: RootState) => state.user.isLogined);
-	
+
 	function onClick() {
 		if (!inputUserName.trim()) {
 			return;
@@ -29,28 +28,26 @@ function Login() {
 		dispatch(favoritesSlice.actions.loadFavorites());
 	}
 
-	const loginMessage = isLogined ? (
-		<Paragraph text={'Success'} />
-	) : null;
+	const loginMessage = isLogined ? <Paragraph text={'Success'} /> : null;
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
-		setInputUserName(event.target.value); // Обновление состояния при каждом вводе в инпут
+		setInputUserName(event.target.value);
 	}
 
 	if (isLogined) {
-		return <Navigate to='/'/>;
+		return <Navigate to="/" />;
 	}
 
 	return (
 		<div className={styles['login_wrapper']} data-testid="loginForm">
-			<Heading headingText={headingText} level={1} appearance='big'/>
-			<input 
-				type="text" 
-				placeholder={placeholder} 
+			<Heading headingText={headingText} level={1} appearance="big" />
+			<input
+				type="text"
+				placeholder={placeholder}
 				className={styles['input_login']}
-				value={inputUserName} 
+				value={inputUserName}
 				onChange={handleChange}
-				id='loginName'
+				id="loginName"
 			/>
 			<Button ref={buttonLoginRef} textButton={textButton} onClick={onClick} />
 			{loginMessage}
